@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<title>Paush Design Ad</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+body{font-family:Montserrat,"Noto Color Emoji",sans-serif;color:#fff}
+#c{position:absolute;inset:0;width:1080px;height:1920px;display:block}
+.L{position:absolute;opacity:0;pointer-events:none}
+.serif{font-family:"Playfair Display",serif}
+.gold{color:#E3C27A}
+/* vignette for legibility */
+#vig{position:absolute;inset:0;opacity:1;background:linear-gradient(rgba(10,8,6,.55) 0%,rgba(10,8,6,0) 26%,rgba(10,8,6,0) 52%,rgba(10,8,6,.55) 78%,rgba(10,8,6,.8) 100%)}
+#brand{left:0;right:0;top:120px;text-align:center;font:600 30px Montserrat;letter-spacing:12px;color:#F3E6C8;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+/* hook */
+#hookT{left:70px;right:70px;top:250px;text-align:center;padding:34px 20px 30px;border-radius:40px;background:rgba(18,15,12,.66);border:2px solid rgba(227,194,122,.45)}
+#hookT .a{font:700 86px/1.05 "Playfair Display";color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+#hookT .b{font:italic 500 86px/1.15 "Playfair Display";white-space:nowrap;color:#E3C27A;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+.tag{position:absolute;font:700 30px Montserrat;letter-spacing:5px;padding:12px 22px;border-radius:30px;background:rgba(15,13,11,.72);border:2px solid rgba(255,255,255,.35)}
+#slider{position:absolute;top:0;bottom:0;width:6px;margin-left:-3px;background:#fff;box-shadow:0 0 24px rgba(255,255,255,.8)}
+#knob{position:absolute;top:1040px;left:50%;width:120px;height:120px;margin-left:-60px;border-radius:50%;background:#fff;color:#1d1b18;font:800 44px/120px Montserrat;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+/* name card */
+#nameCard{left:70px;right:70px;top:1010px;padding:40px 46px 38px;border-radius:36px;background:linear-gradient(135deg,rgba(24,20,16,.86),rgba(24,20,16,.62));border:2px solid rgba(227,194,122,.55);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+#nameCard .k{font:700 28px Montserrat;letter-spacing:10px;color:#E3C27A}
+#nameCard .n{font:700 108px/1.05 "Playfair Display";margin-top:8px}
+#nameCard .r{font:600 40px Montserrat;color:#efe6d6;margin-top:10px}
+#nameCard .line{height:3px;width:140px;background:#E3C27A;margin:22px 0 0}
+/* section labels */
+.sec{left:0;right:0;top:260px;text-align:center}
+.sec .k{display:inline-block;font:800 34px Montserrat;letter-spacing:10px;color:#1d1b18;background:#E3C27A;padding:14px 30px 12px;border-radius:40px}
+.sec .t{display:inline-block;font:700 70px/1.1 "Playfair Display";margin-top:18px;padding:14px 34px 18px;border-radius:30px;background:rgba(18,15,12,.62)}
+.sec .s{font:600 40px Montserrat;color:#f3ead9;margin-top:10px;text-shadow:0 3px 14px rgba(0,0,0,.7)}
+/* style question */
+#q{left:50px;right:50px;top:300px;text-align:center}
+#q .t{display:inline-block;font:700 100px/1.08 "Playfair Display";padding:24px 40px 30px;border-radius:40px;background:rgba(18,15,12,.6)}
+#q .nums{display:flex;justify-content:center;gap:20px;margin-top:34px}
+#q .nums div{width:110px;height:110px;border-radius:50%;background:rgba(15,13,11,.75);border:3px solid #E3C27A;font:800 54px/104px Montserrat;color:#E3C27A;opacity:0}
+/* style label */
+#styleL{left:60px;right:60px;top:250px;text-align:center}
+#styleL .num{display:inline-block;width:96px;height:96px;border-radius:50%;background:#E3C27A;color:#1d1b18;font:800 52px/96px Montserrat}
+#styleL .name{display:inline-block;font:700 104px/1.1 "Playfair Display";margin-top:14px;padding:8px 40px 18px;border-radius:30px;background:rgba(18,15,12,.6)}
+#styleL .d{display:table;margin-left:auto;margin-right:auto;font:600 38px Montserrat;color:#fff;margin-top:14px;background:rgba(15,13,11,.62);padding:12px 26px;border-radius:30px}
+#wipe{position:absolute;top:0;bottom:0;width:8px;margin-left:-4px;background:linear-gradient(#fff,#E3C27A,#fff);box-shadow:0 0 30px rgba(255,230,180,.9);opacity:0}
+#cmt{left:50%;top:1160px;transform:translateX(-50%);white-space:nowrap;font:700 44px Montserrat,"Noto Color Emoji";background:#fff;color:#1d1b18;padding:20px 38px;border-radius:50px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+/* 2D plan */
+#bp{position:absolute;inset:0;opacity:0;background:#0f2a4a;background-image:linear-gradient(rgba(255,255,255,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.07) 2px,transparent 2px),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:180px 180px,180px 180px,36px 36px,36px 36px}
+#plan{position:absolute;inset:0;width:1080px;height:1920px;opacity:0}
+#plan .w{fill:none;stroke:#fff;stroke-width:10;stroke-linejoin:round}
+#plan .f{fill:rgba(255,255,255,.06);stroke:#cfe4ff;stroke-width:4}
+#plan .dim{stroke:#E3C27A;stroke-width:3;fill:none}
+#plan text{font:600 26px Montserrat;fill:#cfe4ff;letter-spacing:3px}
+#plan .dt{fill:#E3C27A;font:700 30px Montserrat}
+#procL{left:0;right:0;top:230px;text-align:center}
+#procL .k{display:inline-block;font:800 40px Montserrat;letter-spacing:8px;padding:16px 34px 13px;border-radius:44px;background:#E3C27A;color:#1d1b18}
+#procL .arrow{font:700 40px Montserrat;color:#fff;margin:0 16px}
+/* budget split */
+#divider{position:absolute;left:537px;top:0;bottom:0;width:6px;background:#fff;box-shadow:0 0 20px rgba(255,255,255,.7)}
+.bl{top:300px;width:460px;text-align:center;padding:22px 10px 20px;border-radius:30px;background:rgba(18,15,12,.66)}
+.bl .k{font:800 46px Montserrat;letter-spacing:6px}
+.bl .s{font:600 30px Montserrat;color:#f3ead9;margin-top:8px}
+#lux{left:35px}#lux .k{color:#E3C27A}
+#aff{right:35px}#aff .k{color:#fff}
+#both{left:50%;top:560px;transform:translateX(-50%);white-space:nowrap;font:700 48px "Playfair Display";background:rgba(15,13,11,.8);border:2px solid #E3C27A;padding:18px 40px;border-radius:50px}
+/* captions */
+#cap{left:50px;right:50px;top:1110px;display:flex;justify-content:center;z-index:5}
+#capT{background:rgba(15,13,11,.78);font:600 46px/1.3 Montserrat,"Noto Color Emoji";padding:18px 34px 16px;border-radius:26px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#capT .hl{color:#E3C27A}
+/* CTA */
+#ctaBg{position:absolute;inset:0;opacity:0;background:linear-gradient(rgba(14,12,10,.78),rgba(14,12,10,.6) 40%,rgba(14,12,10,.88))}
+#cta{left:60px;right:60px;top:300px;text-align:center}
+#mono{width:150px;height:190px;margin:0 auto}
+#cta .w{font:700 112px/1 "Playfair Display";letter-spacing:6px;margin-top:22px}
+#cta .w2{font:600 34px Montserrat;letter-spacing:16px;color:#E3C27A;margin-top:12px}
+#cta .p{font:600 42px Montserrat;margin-top:34px;color:#f3ead9}
+#chips{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px}
+#chips div{font:600 32px Montserrat;padding:12px 24px;border-radius:30px;border:2px solid rgba(227,194,122,.7);color:#f3ead9;opacity:0}
+#btn{left:90px;right:90px;top:1300px;height:150px;border-radius:80px;background:#F7EEDC;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 0 0 0 rgba(227,194,122,.6),0 24px 50px rgba(0,0,0,.4)}
+#btn b{font:800 52px Montserrat;color:#1d1b18}
+#btn .wa{width:84px;height:84px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center}
+#tapHint{left:0;right:0;top:1480px;text-align:center;font:700 40px Montserrat,"Noto Color Emoji";color:#E3C27A}
+#disc{left:0;right:0;top:1640px;text-align:center;font:500 22px Montserrat;color:rgba(255,255,255,.55);letter-spacing:1px}
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="vig"></div>
+
+<!-- hook -->
+<div class="L" id="hookT"><div class="a">Khaali ghar ko</div><div class="b">Dream Home banaiye ✨</div></div>
+<div class="L" id="sliderWrap" style="inset:0"><div id="slider"><div id="knob">‹ ›</div></div>
+  <div class="tag" id="tBefore" style="left:40px;top:640px">BEFORE</div><div class="tag" id="tAfter" style="right:40px;top:640px;background:#E3C27A;color:#1d1b18;border-color:#E3C27A">AFTER</div></div>
+
+<div class="L" id="brand">PAUSH&nbsp;DESIGN</div>
+
+<!-- intro -->
+<div class="L" id="nameCard"><div class="k">PAUSH DESIGN</div><div class="n">Priya Tinwal</div><div class="r">Interior Designer · Jaipur</div><div class="line"></div></div>
+
+<!-- spaces -->
+<div class="L sec" id="sp"><div class="k" id="spK">RESIDENTIAL</div><br><div class="t" id="spT">Homes &amp; Apartments</div></div>
+
+<!-- style question -->
+<div class="L" id="q"><div class="t">Aapki style<br><span class="gold" style="font-style:italic">kaunsi hai?</span></div>
+  <div class="nums"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div></div>
+
+<!-- style labels -->
+<div class="L" id="styleL"><div class="num" id="sN">1</div><div class="name" id="sName">Modern</div><div class="d" id="sDesc">Clean lines · Neutral tones</div></div>
+<div id="wipe"></div>
+<div class="L" id="cmt">💬 Comment karein: 1, 2, 3, 4 ya 5?</div>
+
+<!-- 2D -> 3D -->
+<div id="bp"></div>
+<svg id="plan" viewBox="0 0 1080 1920"></svg>
+<div class="L" id="procL"><span class="k" id="pk1">2D PLAN</span><span class="arrow" id="parr">➜</span><span class="k" id="pk2" style="background:#fff">3D DESIGN</span></div>
+
+<!-- budget -->
+<div class="L" id="divider"></div>
+<div class="L bl" id="lux"><div class="k">LUXURY</div><div class="s">Premium finishes</div></div>
+<div class="L bl" id="aff"><div class="k">AFFORDABLE</div><div class="s">Smart budget</div></div>
+<div class="L" id="both">Aapke budget mein ✓</div>
+
+<!-- captions -->
+<div class="L" id="cap"><div id="capT"></div></div>
+
+<!-- CTA -->
+<div id="ctaBg"></div>
+<div class="L" id="cta">
+  <svg id="mono" viewBox="0 0 150 190"><path d="M10 185 V80 Q10 12 75 6 Q140 12 140 80 V185 Z" fill="none" stroke="#E3C27A" stroke-width="6"/><path d="M28 185 V86 Q28 30 75 24 Q122 30 122 86 V185" fill="none" stroke="#E3C27A" stroke-width="2" opacity=".6"/><text x="75" y="140" text-anchor="middle" font-family="Playfair Display" font-weight="700" font-size="84" fill="#F7EEDC">P</text></svg>
+  <div class="w">PAUSH</div><div class="w2">DESIGN</div>
+  <div class="p">Priya Tinwal · Interior Designer, Jaipur</div>
+  <div id="chips"><div>Residential</div><div>Commercial</div><div>2D Planning</div><div>3D Design</div><div>Architecture</div><div>Luxury &amp; Affordable</div></div>
+</div>
+<div class="L" id="btn"><div class="wa"><svg width="54" height="54" viewBox="0 0 64 64"><path d="M32 6C17.6 6 6 17.3 6 31.3c0 4.9 1.4 9.4 3.9 13.3L6 58l13.9-3.7c3.6 1.9 7.7 3 12.1 3 14.4 0 26-11.3 26-25.3S46.4 6 32 6z" fill="#fff"/><path d="M24.5 19.5c-.6-1.3-1.2-1.3-1.8-1.3h-1.5c-.5 0-1.4.2-2.1 1-.7.8-2.7 2.6-2.7 6.4s2.8 7.4 3.2 7.9c.4.5 5.4 8.4 13.3 11.5 6.6 2.6 7.9 2.1 9.3 1.9 1.4-.1 4.6-1.9 5.3-3.7.7-1.8.7-3.4.5-3.7-.2-.3-.7-.5-1.5-.9s-4.6-2.3-5.3-2.5c-.7-.3-1.2-.4-1.7.4-.5.8-2 2.5-2.4 3-.4.5-.9.6-1.7.2-.8-.4-3.3-1.2-6.2-3.8-2.3-2-3.9-4.6-4.3-5.4-.4-.8 0-1.2.4-1.6.4-.4.8-.9 1.2-1.4.4-.5.5-.8.8-1.3.3-.5.1-1-.1-1.4-.2-.4-1.6-4.2-2.3-5.7z" fill="#25D366"/></svg></div><b>Abhi Message Karein</b></div>
+<div class="L" id="tapHint">👇 Neeche button dabayein</div>
+<div class="L" id="disc">3D visuals are representative</div>
+
+<script type="module">
+import * as E from './src/engine.js';
+const THREE = E.THREE;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const eo = (t) => 1 - Math.pow(1 - clamp(t), 3);
+const eio = (t) => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const eback = (t) => { t = clamp(t); const c1 = 1.6, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+const prog = (t, a, d) => clamp((t - a) / d);
+function show(el, t, a, { dur = .45, dy = 30, s0 = .94, base = '', out = null, outDur = .25 } = {}) {
+  if (typeof el === 'string') el = $(el);
+  if (t < a || (out !== null && t > out + outDur)) { el.style.opacity = 0; return 0; }
+  const p = prog(t, a, dur), e = eo(p);
+  let o = clamp((t - a) / (dur * .6));
+  if (out !== null && t > out) o *= 1 - prog(t, out, outDur);
+  el.style.opacity = o;
+  el.style.transform = `${base} translateY(${(1 - e) * dy}px) scale(${lerp(s0, 1, eback(p))})`;
+  return p;
+}
+
+await document.fonts.ready;
+E.init($('c'));
+
+// ------------------------------------------------------------- cameras
+const HERO = { p: [0.75, 1.3, 2.6], t: [-0.3, 1.1, -2.3], fov: 64 };
+const CAMS = {
+  hook:   [{ p: [0.95, 1.32, 3.0], t: [-0.3, 1.1, -2.3], fov: 64 }, { p: [0.6, 1.28, 2.45], t: [-0.3, 1.1, -2.3], fov: 64 }],
+  intro:  [{ p: [0.6, 1.28, 2.45], t: [-0.3, 1.1, -2.3], fov: 64 }, { p: [-0.5, 1.3, 2.2], t: [-0.2, 1.05, -2.3], fov: 64 }],
+  bedroom:[{ p: [0.9, 1.45, 2.3], t: [-0.25, 0.95, -2.2], fov: 64 }, { p: [0.4, 1.4, 1.9], t: [-0.25, 0.95, -2.2], fov: 64 }],
+  office: [{ p: [1.3, 1.55, 2.5], t: [-0.2, 1.0, -1.8], fov: 64 }, { p: [0.7, 1.5, 2.1], t: [-0.2, 1.0, -1.8], fov: 64 }],
+  cafe:   [{ p: [1.4, 1.45, 2.7], t: [-0.4, 1.15, -2.0], fov: 64 }, { p: [0.8, 1.4, 2.3], t: [-0.4, 1.15, -2.0], fov: 64 }],
+  q:      [{ p: [-0.5, 1.3, 2.2], t: [-0.2, 1.05, -2.3], fov: 64 }, { p: [-0.2, 1.3, 2.5], t: [-0.3, 1.1, -2.3], fov: 64 }],
+  styles: [{ p: [1.15, 1.3, 2.75], t: [-0.3, 1.1, -2.3], fov: 64 }, { p: [-0.75, 1.3, 2.45], t: [-0.3, 1.1, -2.3], fov: 64 }],
+  budget: [{ p: [0.55, 1.3, 2.55], t: [-0.3, 1.1, -2.3], fov: 64 }, { p: [0.35, 1.28, 2.2], t: [-0.3, 1.1, -2.3], fov: 64 }],
+  cta:    [{ p: [0.75, 1.3, 2.6], t: [-0.3, 1.1, -2.3], fov: 64 }, { p: [0.45, 1.3, 2.3], t: [-0.3, 1.1, -2.3], fov: 64 }],
+};
+const TOP = { p: [-0.25, 12.0, -1.45], t: [-0.25, 0, -1.46], fov: 38, up: [0, 0, -1] };
+function camAt(name, k) { const [a, b] = CAMS[name]; return E.lerpCam(a, b, k); }
+function setCamUp(c, up) { E.camera.up.set(...up).normalize(); E.camera.position.set(...c.p); if (E.camera.fov !== c.fov) { E.camera.fov = c.fov; E.camera.updateProjectionMatrix(); } E.camera.lookAt(...c.t); }
+
+// ------------------------------------------------------------- plan overlay (projected from the top camera)
+const modern = E.scenes.modern, items = modern.userData.items;
+items.forEach((g) => { g.userData.y0 = g.position.y; });
+function buildPlan() {
+  setCamUp(TOP, TOP.up); E.camera.updateMatrixWorld();
+  const svg = $('plan'); svg.innerHTML = '';
+  const NS = 'http://www.w3.org/2000/svg';
+  const P = (x, z) => E.project(x, 0, z);
+  const poly = (pts, cls) => { const el = document.createElementNS(NS, 'path'); el.setAttribute('d', 'M' + pts.map((p) => p.map((v) => v.toFixed(1)).join(' ')).join(' L') + ' Z'); el.setAttribute('class', cls); svg.appendChild(el); return el; };
+  const R = { x0: -3.2, x1: 3.2, z0: -3.0, z1: 3.6 };
+  const walls = poly([P(R.x0, R.z0), P(R.x1, R.z0), P(R.x1, R.z1), P(R.x0, R.z1)], 'w');
+  const order = ['rug', 'sofa', 'table', 'chair', 'side', 'lamp', 'plant'];
+  const els = [walls];
+  for (const name of order) {
+    const g = items.find((i) => i.userData.item === name); if (!g) continue;
+    const b = new THREE.Box3().setFromObject(g);
+    const el = poly([P(b.min.x, b.min.z), P(b.max.x, b.min.z), P(b.max.x, b.max.z), P(b.min.x, b.max.z)], 'f');
+    els.push(el);
+    const c = P((b.min.x + b.max.x) / 2, (b.min.z + b.max.z) / 2);
+    if (['sofa', 'table', 'rug', 'chair'].includes(name)) {
+      const t = document.createElementNS(NS, 'text'); t.setAttribute('x', c[0]); t.setAttribute('y', c[1] + (name === 'rug' ? 120 : 9)); t.setAttribute('text-anchor', 'middle'); t.textContent = name.toUpperCase(); svg.appendChild(t); els.push(t);
+    }
+  }
+  // window gap + dimension line
+  const w0 = P(R.x0, -2.1), w1 = P(R.x0, 0.3);
+  const win = document.createElementNS(NS, 'line'); win.setAttribute('x1', w0[0]); win.setAttribute('y1', w0[1]); win.setAttribute('x2', w1[0]); win.setAttribute('y2', w1[1]); win.setAttribute('stroke', '#0f2a4a'); win.setAttribute('stroke-width', '14'); svg.appendChild(win); els.push(win);
+  const d0 = P(R.x0, R.z0 - 0.35), d1 = P(R.x1, R.z0 - 0.35);
+  const dim = document.createElementNS(NS, 'path'); dim.setAttribute('d', `M${d0[0]} ${d0[1] - 14} V${d0[1] + 14} M${d0[0]} ${d0[1]} H${d1[0]} M${d1[0]} ${d1[1] - 14} V${d1[1] + 14}`); dim.setAttribute('class', 'dim'); svg.appendChild(dim); els.push(dim);
+  const dt = document.createElementNS(NS, 'text'); dt.setAttribute('x', (d0[0] + d1[0]) / 2); dt.setAttribute('y', d0[1] - 22); dt.setAttribute('text-anchor', 'middle'); dt.setAttribute('class', 'dt'); dt.textContent = '21′ × 22′ LIVING'; svg.appendChild(dt); els.push(dt);
+  els.forEach((el) => { if (el.getTotalLength && el.tagName !== 'text') { const L = el.getTotalLength(); el.dataset.len = L; el.style.strokeDasharray = L; el.style.strokeDashoffset = L; } });
+  return els;
+}
+const PLAN = buildPlan();
+
+// ------------------------------------------------------------- timeline
+let TL, P, SC, EV, CUES;
+const at = (id, f) => P[id].s + f * (P[id].e - P[id].s);
+const STYLES = [
+  ['modern', 'Modern', 'Clean lines · Neutral tones'],
+  ['traditional', 'Traditional', 'Classic · Rich · Timeless'],
+  ['scandinavian', 'Scandinavian', 'Light wood · Bright · Cozy'],
+  ['industrial', 'Industrial', 'Exposed brick · Metal · Open'],
+  ['bohemian', 'Bohemian', 'Vibrant · Artistic · Free'],
+];
+const SPACES = [['bedroom', 'RESIDENTIAL', 'Homes &amp; Apartments'], ['office', 'COMMERCIAL', 'Offices &amp; Retail'], ['cafe', 'COMMERCIAL', 'Restaurants · Cafés · Hotels']];
+window.setTimeline = (tl) => {
+  TL = tl; P = tl.phrases; const c = tl.cues || {}; const cue = (k, v) => (c[k] !== undefined ? c[k] : v);
+  SC = {
+    hook: [0, P.intro.s - .12], intro: [P.intro.s - .12, P.spaces.s - .1], spaces: [P.spaces.s - .1, P.styleq.s - .1],
+    q: [P.styleq.s - .1, P.styles.s - .05], styles: [P.styles.s - .05, P.process.s - .1], process: [P.process.s - .1, P.budget.s - .1],
+    budget: [P.budget.s - .1, P.cta.s - .12], cta: [P.cta.s - .12, tl.end + 1],
+  };
+  const st = [0, 1, 2, 3, 4].map((i) => cue('style' + i, at('styles', i / 5)));
+  const sp = [0, 1, 2].map((i) => cue('space' + i, i === 0 ? SC.spaces[0] : at('spaces', [0, .38, .68][i])));
+  EV = { st, sp, sweep: [0.35, 1.75], planDraw: [SC.process[0] + .05, at('process', .32)], drop: at('process', .36), swoop: [at('process', .58), at('process', .95)], ctaTap: cue('ctaTap', at('cta', .45)) };
+  CUES = [['whoosh', 0.3], ['swipe', .4], ['chime', 1.7], ['whoosh', SC.intro[0]], ['pop', SC.intro[0] + .25],
+    ...sp.map((x) => ['whoosh', x - .05]), ['whoosh', SC.q[0]], ...[0, 1, 2, 3, 4].map((i) => ['tick', SC.q[0] + .35 + i * .09]),
+    ...st.map((x, i) => [i ? 'swipe' : 'whoosh', x]), ...st.map((x) => ['pop', x + .12]), ['pop', at('styles', .86)],
+    ['whoosh', SC.process[0]], ['draw', EV.planDraw[0]], ...items.map((_, i) => ['thud', EV.drop + i * .12]), ['whoosh', EV.swoop[0]], ['chime', EV.swoop[1] - .1],
+    ['whoosh', SC.budget[0]], ['pop', SC.budget[0] + .2], ['pop', SC.budget[0] + .35], ['chime', at('budget', .55)],
+    ['whoosh', SC.cta[0]], ...[0, 1, 2, 3, 4, 5].map((i) => ['tick', SC.cta[0] + .7 + i * .08]), ['tap', EV.ctaTap], ['chime', EV.ctaTap + .05]]
+    .map(([type, t]) => ({ type, t: +Math.max(0, t).toFixed(3) }));
+};
+window.getCues = () => CUES;
+
+// ------------------------------------------------------------- captions
+const CAPS = {
+  spaces: 'Ghar, flat, office, shop, restaurant ya hotel — <span class="hl">har space</span> design karte hain',
+  process: 'Pehle <span class="hl">2D plan</span>, phir <span class="hl">3D design</span> — banne se pehle hi apna ghar dekhiye',
+  budget: '<span class="hl">Luxury</span> ho ya <span class="hl">affordable</span> — aapke budget mein best design',
+};
+let lastCap = null;
+function caption(t) {
+  let id = null; for (const k in CAPS) { const p = P[k]; if (t >= p.s - .05 && t < p.e + .15) { id = k; break; } }
+  if (!id) { $('cap').style.opacity = 0; return; }
+  if (id !== lastCap) { $('capT').innerHTML = CAPS[id]; lastCap = id; }
+  $('cap').style.top = (id === 'process' ? 360 : 1110) + 'px';
+  show('cap', t, P[id].s - .05, { dur: .3, dy: 20, out: P[id].e + .05, outDur: .1 });
+}
+
+// ------------------------------------------------------------- frame
+const ALL = ['cap', 'hookT', 'sliderWrap', 'brand', 'nameCard', 'sp', 'q', 'styleL', 'cmt', 'procL', 'divider', 'lux', 'aff', 'both', 'cta', 'btn', 'tapHint', 'disc'];
+function resetItems(state = 'placed', t = 0) {
+  items.forEach((g, i) => {
+    if (state === 'hidden') { g.visible = false; return; }
+    g.visible = true;
+    if (state === 'drop') {
+      const p = prog(t, EV.drop + i * .12, .45);
+      g.visible = p > 0; g.position.y = g.userData.y0 + (1 - eo(p)) * 2.2; g.scale.setScalar(lerp(.6, 1, eback(p)));
+    } else { g.position.y = g.userData.y0; g.scale.setScalar(1); }
+  });
+}
+window.renderFrame = (t) => {
+  ALL.forEach((id) => { $(id).style.opacity = 0; });
+  $('bp').style.opacity = 0; $('plan').style.opacity = 0; $('wipe').style.opacity = 0; $('ctaBg').style.opacity = 0;
+  $('c').style.filter = ''; $('vig').style.opacity = 1;
+  resetItems('placed');
+  E.camera.up.set(0, 1, 0);
+  const sc = Object.keys(SC).find((k) => t >= SC[k][0] && t < SC[k][1]) || 'cta';
+  const [a, b] = SC[sc], k = clamp((t - a) / (b - a));
+  if (t >= SC.intro[0] && t < SC.cta[0]) $('brand').style.opacity = 0.9;
+
+  if (sc === 'hook') {
+    E.setCam(camAt('hook', eio(k)));
+    const sp = lerp(.58, 0, eio(prog(t, EV.sweep[0], EV.sweep[1] - EV.sweep[0])));   // fraction of width still "before"
+    const px = sp * E.W;
+    E.renderSplit('empty', 'modern', px);
+    $('sliderWrap').style.opacity = sp > .002 ? 1 : 1 - prog(t, EV.sweep[1], .2);
+    $('slider').style.left = px + 'px';
+    $('tBefore').style.opacity = clamp(sp * 6); $('tAfter').style.opacity = 1;
+    $('hookT').style.opacity = 1; $('hookT').style.transform = `scale(${1 + .015 * Math.sin(t * 4)})`;
+    return;
+  }
+  if (sc === 'intro') {
+    E.setCam(camAt('intro', eio(k))); E.render('modern');
+    show('nameCard', t, a + .15, { dy: 60, s0: .9 });
+    return;
+  }
+  if (sc === 'spaces') {
+    let i = 0; for (let j = 0; j < 3; j++) if (t >= EV.sp[j]) i = j;
+    const s0 = EV.sp[i], s1 = i < 2 ? EV.sp[i + 1] : SC.spaces[1];
+    E.setCam(camAt(SPACES[i][0], eio(prog(t, s0, s1 - s0)))); E.render(SPACES[i][0]);
+    $('spK').innerHTML = SPACES[i][1]; $('spT').innerHTML = SPACES[i][2];
+    show('sp', t, s0 + .05, { dy: -30 });
+    caption(t); return;
+  }
+  if (sc === 'q') {
+    E.setCam(camAt('q', eio(k))); E.render('modern');
+    $('c').style.filter = `brightness(${1 - .25 * eo(prog(t, a, .3))})`;
+    show('q', t, a + .02, { s0: .85 });
+    [...$('q').querySelectorAll('.nums div')].forEach((d, i) => show(d, t, a + .35 + i * .09, { dy: 40, s0: .5 }));
+    return;
+  }
+  if (sc === 'styles') {
+    E.setCam(camAt('styles', k));
+    let i = 0; for (let j = 0; j < 5; j++) if (t >= EV.st[j]) i = j;
+    const wp = i > 0 ? prog(t, EV.st[i], .4) : 1;
+    if (wp < 1) {
+      const x = eio(wp) * E.W;
+      E.renderSplit(STYLES[i][0], STYLES[i - 1][0], x);
+      $('wipe').style.opacity = 1; $('wipe').style.left = x + 'px';
+    } else E.render(STYLES[i][0]);
+    $('sN').textContent = i + 1; $('sName').textContent = STYLES[i][1]; $('sDesc').textContent = STYLES[i][2];
+    show('styleL', t, EV.st[i] + .08, { dy: 40, s0: .9 });
+    show('cmt', t, at('styles', .86), { dy: 40, s0: .7, base: 'translateX(-50%)' });
+    return;
+  }
+  if (sc === 'process') {
+    const [d0, d1] = EV.planDraw, [w0, w1] = EV.swoop;
+    if (t < w0) {
+      setCamUp(TOP, TOP.up);
+      resetItems(t < EV.drop ? 'hidden' : 'drop', t);
+      const bpO = 1 - prog(t, EV.drop - .25, .5) * .85;
+      $('bp').style.opacity = bpO; $('vig').style.opacity = 0;
+    } else {
+      const q = eio(prog(t, w0, w1 - w0));
+      // pull back first (z), then crane down (y), so the camera never flies through the lamps
+      const c = E.lerpCam(TOP, HERO, q);
+      c.p[2] = lerp(TOP.p[2], HERO.p[2], eo(Math.min(1, q * 1.6)));
+      c.p[1] = lerp(TOP.p[1], HERO.p[1], Math.pow(q, 1.6));
+      const up = [0, Math.sin(q * Math.PI / 2), -Math.cos(q * Math.PI / 2)];
+      setCamUp(c, up);
+      $('bp').style.opacity = .15 * (1 - q); $('vig').style.opacity = q;
+    }
+    E.render('modern');
+    E.camera.up.set(0, 1, 0);
+    // draw plan lines
+    const dp = prog(t, d0, d1 - d0);
+    PLAN.forEach((el, i) => {
+      const local = clamp(dp * PLAN.length - i * .7);
+      if (el.dataset.len) el.style.strokeDashoffset = el.dataset.len * (1 - eo(local));
+      else el.style.opacity = local;
+    });
+    $('plan').style.opacity = t < w0 ? 1 : 1 - prog(t, w0, .35);
+    const toD = t >= w0 - .1;
+    show('procL', t, a + .1, { dy: -30 });
+    $('pk1').style.opacity = toD ? .45 : 1; $('pk2').style.opacity = toD ? 1 : .35; $('parr').style.opacity = toD ? 1 : .35;
+    caption(t); return;
+  }
+  if (sc === 'budget') {
+    E.setCam(camAt('budget', eio(k)));
+    E.renderSplit('traditional', 'scandinavian', 540);
+    $('divider').style.opacity = 1;
+    show('lux', t, a + .15, { dy: -30 }); show('aff', t, a + .3, { dy: -30 });
+    show('both', t, at('budget', .55), { s0: .7, base: 'translateX(-50%)' });
+    caption(t); return;
+  }
+  // cta
+  E.setCam(camAt('cta', eio(k))); E.render('bohemian');
+  $('c').style.filter = 'blur(6px) brightness(.8)';
+  $('ctaBg').style.opacity = eo(prog(t, a, .4));
+  show('cta', t, a + .1, { dy: 50, s0: .92 });
+  [...$('chips').children].forEach((d, i) => show(d, t, a + .7 + i * .08, { dy: 30, s0: .7 }));
+  const bp = show('btn', t, a + .45, { dy: 60, s0: .7 });
+  if (t > a + .9) {
+    const pulse = (Math.sin((t - a) * 6) + 1) / 2, press = t >= EV.ctaTap && t < EV.ctaTap + .15 ? .94 : 1;
+    $('btn').style.transform = `scale(${press * (1 + .03 * pulse)})`;
+    $('btn').style.boxShadow = `0 0 0 ${pulse * 22}px rgba(227,194,122,${.45 - .35 * pulse}),0 24px 50px rgba(0,0,0,.4)`;
+  }
+  show('tapHint', t, EV.ctaTap + .3, { dy: -20 });
+  if (t > EV.ctaTap + .8) $('tapHint').style.transform = `translateY(${Math.abs(Math.sin((t - EV.ctaTap) * 5)) * 16}px)`;
+  show('disc', t, a + .8, { dy: 0 });
+};
+window.READY = true;
+</script>
+</body>
+</html>

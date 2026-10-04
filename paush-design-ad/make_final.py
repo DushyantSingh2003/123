@@ -1,0 +1,170 @@
+"""Builds the final voiced Paush Design ad from Priya's recording.
+
+    python3 make_final.py audio/vo_paush.m4a
+
+1. finds the 8 script lines in the recording (by the pauses between them), trims long gaps
+2. pins each style wipe to the moment its name is spoken ("Modern... Traditional...")
+3. writes timeline_final.json, re-renders the visuals on that timing, regenerates music/SFX
+4. mixes voice + ducked music + SFX -> output/paush_design_ad_final_9x16.mp4
+   (+ output/vo_alignment.png to eyeball the sync)
+"""
+import itertools
+import json
+import os
+import subprocess
+import sys
+
+import numpy as np
+from scipy.io import wavfile
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(ROOT, 'output')
+SR = 48000
+FRAME = 0.01
+SIL_DB = -40.0
+GAP = 0.22          # pause kept between lines (s)
+END_HOLD = 1.8      # end card hold after the last word (s)
+ORDER = ['hook', 'intro', 'spaces', 'styleq', 'styles', 'process', 'budget', 'cta']
+
+
+def run(cmd):
+    print('$', ' '.join(cmd))
+    subprocess.run(cmd, check=True, cwd=ROOT)
+
+
+def load(path):
+    tmp = os.path.join(OUT, '_vo_in.wav')
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-ac', '1', '-ar', str(SR), '-af', 'highpass=f=70', tmp], check=True)
+    _, x = wavfile.read(tmp)
+    return x.astype(np.float32) / 32768.0
+
+
+def silent_mask(x):
+    n = len(x) // int(FRAME * SR)
+    fr = x[: n * int(FRAME * SR)].reshape(n, -1)
+    db = 20 * np.log10(np.sqrt((fr ** 2).mean(axis=1)) + 1e-9)
+    floor = np.percentile(db, 10)                       # adapt to the room's noise floor
+    return db < max(SIL_DB, floor + 10)
+
+
+def spans(mask, lo, hi, want_silence=True, min_len=0.12):
+    out, i0 = [], None
+    a, b = int(lo / FRAME), min(len(mask), int(hi / FRAME))
+    for i in range(a, b + 1):
+        on = i < b and mask[i] == want_silence
+        if on and i0 is None:
+            i0 = i
+        if not on and i0 is not None:
+            if (i - i0) * FRAME >= min_len:
+                out.append((i0 * FRAME, i * FRAME))
+            i0 = None
+    return out
+
+
+def split_lines(mask, dur, expect):
+    """choose len(expect)-1 pauses that split the speech into lines of plausible length"""
+    speech = spans(mask, 0, dur, want_silence=False, min_len=0.05)
+    s0, s1 = speech[0][0], speech[-1][1]
+    sil = [p for p in spans(mask, s0, s1, True, 0.15)]
+    sil = sorted(sil, key=lambda p: p[1] - p[0], reverse=True)[:18]   # longest pauses only
+    sil.sort()
+    best, score_best = None, -1e9
+    for combo in itertools.combinations(sil, len(expect) - 1):
+        b = [s0] + [x for p in combo for x in p] + [s1]
+        segs = [(b[2 * i], b[2 * i + 1]) for i in range(len(expect))]
+        r = [(e - s) / x for (s, e), x in zip(segs, expect)]
+        if min(r) < 0.4 or max(r) > 2.2:
+            continue
+        score = sum(p[1] - p[0] for p in combo) - 0.4 * sum(abs(np.log(v)) for v in r)
+        if score > score_best:
+            best, score_best = segs, score
+    if best is None:
+        sys.exit('Could not find the 8 lines in the recording - please leave ~1 s of silence between lines.')
+    return best
+
+
+def main(path):
+    os.makedirs(OUT, exist_ok=True)
+    plan = json.load(open(os.path.join(ROOT, 'timeline.json')))
+    x = load(path)
+    mask = silent_mask(x)
+    expect = [plan['phrases'][k]['e'] - plan['phrases'][k]['s'] for k in ORDER]
+    lines = split_lines(mask, len(x) / SR, expect)
+
+    # splice: lines with fixed gaps, 8 ms fades
+    fade = int(0.008 * SR)
+    parts, t, phrases, cues = [np.zeros(int(0.1 * SR), np.float32)], 0.1, {}, {}
+    for name, (a, b) in zip(ORDER, lines):
+        seg = x[int((a - 0.04) * SR):int((b + 0.08) * SR)].copy()
+        seg[:fade] *= np.linspace(0, 1, fade)
+        seg[-fade:] *= np.linspace(1, 0, fade)
+        phrases[name] = {'s': round(t + 0.04, 3), 'e': round(t + 0.04 + (b - a), 3), 'vo': plan['phrases'][name]['vo']}
+        if name == 'styles':   # each style name = one speech island inside this line
+            isl = spans(mask, a, b, want_silence=False, min_len=0.12)
+            gaps = spans(mask, a, b, True, 0.12)
+            if len(isl) >= 5:
+                # merge to 5 islands at the 4 longest internal pauses
+                cut = sorted(sorted(gaps, key=lambda p: p[1] - p[0], reverse=True)[:4])
+                starts = [isl[0][0]] + [p[1] for p in cut]
+                for i, st in enumerate(starts):
+                    cues[f'style{i}'] = round(t + 0.04 + (st - a) - 0.08, 3)
+        parts += [seg, np.zeros(int(GAP * SR), np.float32)]
+        t += len(seg) / SR + GAP
+    vo = np.concatenate(parts)
+    raw = os.path.join(OUT, 'vo_spliced.wav')
+    wavfile.write(raw, SR, (vo * 32767).astype(np.int16))
+    run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af',
+         'acompressor=threshold=-20dB:ratio=3:attack=5:release=80,loudnorm=I=-15:TP=-1.5:LRA=7', os.path.join(OUT, 'vo_final.wav')])
+    end = round(phrases['cta']['e'] + END_HOLD, 2)
+    tl = {'_note': 'generated by make_final.py from the recorded voiceover', 'end': end, 'phrases': phrases, 'cues': cues}
+    json.dump(tl, open(os.path.join(ROOT, 'timeline_final.json'), 'w'), ensure_ascii=False, indent=1)
+    alignment_png(os.path.join(OUT, 'vo_final.wav'), phrases, cues, os.path.join(OUT, 'vo_alignment.png'))
+    for k, v in phrases.items():
+        print(f"{k:8s} {v['s']:6.2f} {v['e']:6.2f}")
+    print('style cues:', {k: v for k, v in cues.items()})
+
+    run(['node', 'render.cjs', '--timeline', 'timeline_final.json', '--out', 'output/video_final_silent.mp4'])
+    run([sys.executable, os.path.join('audio', 'make_audio.py')])
+    final = os.path.join(OUT, 'paush_design_ad_final_9x16.mp4')
+    run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'output/video_final_silent.mp4', '-i', 'output/vo_final.wav',
+         '-i', 'output/music.wav', '-i', 'output/sfx.wav', '-filter_complex',
+         '[1:a]aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[vo][key];'
+         '[2:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.3[mus];'
+         '[mus][key]sidechaincompress=threshold=0.03:ratio=6:attack=15:release=350[duck];'
+         '[3:a]aformat=sample_rates=48000:channel_layouts=stereo,volume=0.5[sfx];'
+         f'[vo][duck][sfx]amix=inputs=3:normalize=0:duration=longest,atrim=0:{end},loudnorm=I=-14:TP=-1.0:LRA=9[a]',
+         '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest',
+         '-movflags', '+faststart', final])
+    print('wrote', final)
+
+
+def alignment_png(wav, phrases, cues, out_png):
+    from PIL import Image, ImageDraw
+    sr, a = wavfile.read(wav)
+    a = a.astype(np.float32)
+    if a.ndim > 1:
+        a = a.mean(axis=1)
+    dur = len(a) / sr
+    w = 2400
+    img = Image.new('RGB', (w, 360), 'white')
+    d = ImageDraw.Draw(img)
+    hop = max(1, len(a) // w)
+    env = np.abs(a[: hop * w]).reshape(w, hop).max(axis=1)
+    env = env / (env.max() + 1e-9)
+    for xx in range(w):
+        d.line([(xx, 180 - env[xx] * 140), (xx, 180 + env[xx] * 140)], fill=(60, 60, 60))
+    for k, (name, p) in enumerate(phrases.items()):
+        x0, x1 = p['s'] / dur * w, p['e'] / dur * w
+        col = (201, 160, 80) if k % 2 else (40, 70, 120)
+        y = 330 if k % 2 == 0 else 30
+        d.rectangle([x0, y, x1, y + 14], fill=col)
+        d.text((x0 + 2, y - 14 if k % 2 == 0 else y + 16), name, fill=col)
+    for v in cues.values():
+        d.line([(v / dur * w, 40), (v / dur * w, 320)], fill=(200, 40, 40), width=2)
+    img.save(out_png)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        sys.exit(__doc__)
+    main(os.path.abspath(sys.argv[1]))

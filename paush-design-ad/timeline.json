@@ -1,0 +1,15 @@
+{
+  "_note": "Planned timing (seconds) of each voiceover line. Re-timed to Priya's recording when it arrives.",
+  "end": 32.2,
+  "phrases": {
+    "hook":    { "s": 0.10,  "e": 2.60,  "vo": "Khaali ghar ko... dream home banana hai?" },
+    "intro":   { "s": 2.85,  "e": 5.45,  "vo": "Main hoon Priya Tinwal — Paush Design, Jaipur." },
+    "spaces":  { "s": 5.70,  "e": 10.00, "vo": "Ghar ho ya flat, office, shop, restaurant ya hotel — hum har space design karte hain." },
+    "styleq":  { "s": 10.25, "e": 11.45, "vo": "Aapki style kaunsi hai?" },
+    "styles":  { "s": 11.60, "e": 18.60, "vo": "Modern... Traditional... Scandinavian... Industrial... ya Bohemian?" },
+    "process": { "s": 18.90, "e": 23.90, "vo": "Pehle 2D plan, phir 3D design — taaki banne se pehle hi aap apna ghar dekh sakein." },
+    "budget":  { "s": 24.15, "e": 27.35, "vo": "Luxury ho ya affordable — aapke budget mein best design." },
+    "cta":     { "s": 27.60, "e": 30.60, "vo": "Apne sapnon ka ghar design karwaiye — abhi message karein!" }
+  },
+  "cues": {}
+}
