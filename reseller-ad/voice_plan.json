@@ -1,0 +1,56 @@
+{
+  "_note": "Edit list that builds the v2 voiceover from 3 HeyGen clips (same voice). Times are seconds in each source clip. 'snap' cuts sit where HeyGen's word timings are unreliable; voice.py places them from the real audio's pauses.",
+  "tempo": 1.05,
+  "lead": 0.05,
+  "default_gap": 0.16,
+  "sources": {
+    "v1":  { "file": "audio/vo_v1.wav",          "timestamps": "audio/heygen_vo_v1_timestamps.json" },
+    "v2a": { "file": "audio/vo_v2a_hook_price.wav", "timestamps": "audio/heygen_vo_v2a_hook_price_timestamps.json" },
+    "v2b": { "file": "audio/vo_v2b_share_cta.wav",  "timestamps": "audio/heygen_vo_v2b_share_cta_timestamps.json" }
+  },
+  "cuts": [
+    { "src": "v2a", "s": 0.20,  "e": 4.52,  "gap": 0.12, "phrases": { "hook1": [0.277, 3.042], "hook2": [3.160, 4.425] } },
+    { "src": "v1",  "s": 8.07,  "e": 9.80,  "gap": 0.50, "phrases": { "nostock": [8.138, 9.719] } },
+    { "src": "v1",  "s": 11.46, "e": 12.04, "gap": 0.10, "phrases": { "kaise": [11.524, 11.985] } },
+    { "src": "v1",  "s": 12.05, "e": 14.62, "snap": { "region": [12.05, 20.30], "expect": [2.45, 3.0, 2.4], "index": 0 }, "phrases": { "join": [12.117, 14.55] } },
+    { "src": "v1",  "s": 14.80, "e": 17.90, "snap": { "region": [12.05, 20.30], "expect": [2.45, 3.0, 2.4], "index": 1 }, "phrases": { "designs": [14.85, 17.85] } },
+    { "src": "v2b", "s": 0.15,  "e": 2.95,  "snap": { "region": [0.10, 5.28], "expect": [2.65, 1.9], "index": 0 }, "phrases": { "share": [0.237, 2.90] } },
+    { "src": "v1",  "s": 20.28, "e": 22.38, "phrases": { "order": [20.357, 22.30] } },
+    { "src": "v1",  "s": 25.95, "e": 28.06, "phrases": { "single": [26.006, 27.995] } },
+    { "src": "v2a", "s": 4.70,  "e": 8.62,  "phrases": { "price": [4.781, 8.541] } },
+    { "src": "v1",  "s": 28.08, "e": 29.95, "phrases": { "margin": [28.14, 29.878] } },
+    { "src": "v1",  "s": 29.98, "e": 32.12, "phrases": { "delivery": [30.055, 32.044] } },
+    { "src": "v1",  "s": 32.40, "e": 38.50, "phrases": { "brand": [32.465, 34.151], "brandsetup": [34.321, 38.394] } },
+    { "src": "v1",  "s": 38.93, "e": 41.45, "phrases": { "festive": [38.995, 41.379] } },
+    { "src": "v2b", "s": 3.05,  "e": 5.20,  "snap": { "region": [0.10, 5.28], "expect": [2.65, 1.9], "index": 1 }, "phrases": { "cta": [3.15, 4.971] } }
+  ],
+  "word_cues": {
+    "bStrike1": ["v1", 8.296], "bStrike2": ["v1", 9.284],
+    "tap1": ["v2b", 1.185], "tap2": ["v2b", 2.133],
+    "o3": ["v1", 21.581],
+    "eTag": ["v1", 27.034],
+    "price1": ["v2a", 6.163], "price2": ["v2a", 7.348],
+    "eq2": ["v1", 28.417], "eq3": ["v1", 29.365],
+    "g1": ["v1", 34.321], "g2": ["v1", 35.032], "g3": ["v1", 35.862], "gBanner": ["v1", 36.929],
+    "hGo": ["v1", 40.418]
+  },
+  "vo": {
+    "hook1": "Ghar baithe WhatsApp se kurti aur suit sets bechna hai?",
+    "hook2": "Toh ye video poora dekhna!",
+    "nostock": "Na dukaan, na bada stock.",
+    "kaise": "Kaise?",
+    "join": "Hamare WhatsApp reseller group se judo.",
+    "designs": "Hum regular naye designs ki photo-video bhejte rahenge.",
+    "share": "Aap unhe apne Status aur Instagram pe daalo.",
+    "order": "Customer ka order aaye, tab humse khareedo.",
+    "single": "Ek piece bhi milega, wholesale rate pe.",
+    "price": "Kurti aur suit sets, ₹599 aur ₹999 ke andar.",
+    "margin": "Apna margin jodo, aur becho.",
+    "delivery": "Delivery poore India mein, hum karenge.",
+    "brand": "Aur apna khud ka brand banana hai?",
+    "brandsetup": "Website, Meta ads, sourcing... wo bhi hum setup karke dete hain.",
+    "festive": "Festive season aa raha hai, abhi shuru karo.",
+    "cta": "Neeche button dabao, aur group se judo!"
+  },
+  "end_hold": 1.5
+}

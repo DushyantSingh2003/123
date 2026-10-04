@@ -140,7 +140,7 @@ def make_music(end, cues):
     bpm = 104
     beat = 60 / bpm
     bar = 4 * beat
-    kaise = next((c['t'] for c in cues if c['type'] == 'pop'), None)  # first pop = KAISE punch
+    kaise = next((c['t'] for c in cues if c['type'] == 'drop'), None)  # drum break on the "Kaise?" beat
     stop_lo, stop_hi = (kaise - 0.55, kaise + 0.45) if kaise else (-1, -1)
     final_hit = end - 1.6
 
@@ -295,6 +295,7 @@ SFX = {
     'pop': (s_pop, 0.5), 'tap': (s_tap, 0.6), 'thump': (s_thump, 0.65), 'chime': (s_chime, 0.6),
     'send': (s_send, 0.5), 'shutter': (s_shutter, 0.45), 'sparkle': (s_sparkle, 0.6),
     'truck': (lambda: s_whoosh(120, 900, 0.9), 0.4), 'tick': (s_ticks, 0.5),
+    'drop': (lambda: np.zeros(1), 0.0),
 }
 
 

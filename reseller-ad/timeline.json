@@ -1,25 +1,103 @@
 {
-  "_note": "Phrase timings (seconds) for the voiceover. The preview uses these planned timings; make_final.py rewrites them from the real voiceover's word timestamps.",
-  "end": 38.6,
-  "phrases": {
-    "hook1":      { "s": 0.00,  "e": 2.10,  "vo": "Roz WhatsApp Status lagati ho na?" },
-    "hook2":      { "s": 2.15,  "e": 3.80,  "vo": "Good morning wale... tyohaar wale..." },
-    "curious":    { "s": 3.95,  "e": 6.75,  "vo": "Socho, agar usi Status se... kapde bikne lagein toh?" },
-    "nostock":    { "s": 6.90,  "e": 8.25,  "vo": "Na dukaan, na bada stock." },
-    "home":       { "s": 8.35,  "e": 9.15,  "vo": "Ghar baithe business!" },
-    "kaise":      { "s": 9.40,  "e": 9.85,  "vo": "Kaise?" },
-    "join":       { "s": 9.95,  "e": 12.10, "vo": "Hamare WhatsApp reseller group se judo." },
-    "designs":    { "s": 12.25, "e": 14.95, "vo": "Hum regular naye designs ki photo-video bhejte rahenge." },
-    "share":      { "s": 15.05, "e": 17.10, "vo": "Aap unhe Status, Instagram, Facebook pe daalo." },
-    "order":      { "s": 17.20, "e": 18.95, "vo": "Customer ka order aaye, tab humse khareedo." },
-    "products":   { "s": 19.10, "e": 21.95, "vo": "Embroidery wale sets, suit sets, trending kurtiyan..." },
-    "single":     { "s": 22.05, "e": 23.85, "vo": "Ek piece bhi milega, wholesale rate pe." },
-    "margin":     { "s": 23.95, "e": 25.45, "vo": "Apna margin jodo, aur becho." },
-    "delivery":   { "s": 25.55, "e": 27.25, "vo": "Delivery poore India mein, hum karenge." },
-    "brand":      { "s": 27.50, "e": 28.95, "vo": "Aur apna khud ka brand banana hai?" },
-    "brandsetup": { "s": 29.05, "e": 32.45, "vo": "Website, Meta ads, sourcing... wo bhi hum setup karke dete hain." },
-    "festive":    { "s": 32.70, "e": 34.75, "vo": "Festive season aa raha hai, abhi shuru karo." },
-    "cta":        { "s": 34.85, "e": 37.05, "vo": "Neeche button dabao, aur WhatsApp group join karo!" }
+ "_note": "planned timing (estimated from HeyGen word timestamps); voice.py build replaces it with measured timing",
+ "end": 39.85,
+ "phrases": {
+  "hook1": {
+   "s": 0.123,
+   "e": 2.757,
+   "vo": "Ghar baithe WhatsApp se kurti aur suit sets bechna hai?"
   },
-  "cues": {}
+  "hook2": {
+   "s": 2.869,
+   "e": 4.074,
+   "vo": "Toh ye video poora dekhna!"
+  },
+  "nostock": {
+   "s": 4.349,
+   "e": 5.855,
+   "vo": "Na dukaan, na bada stock."
+  },
+  "kaise": {
+   "s": 6.493,
+   "e": 6.932,
+   "vo": "Kaise?"
+  },
+  "join": {
+   "s": 7.148,
+   "e": 9.465,
+   "vo": "Hamare WhatsApp reseller group se judo."
+  },
+  "designs": {
+   "s": 9.74,
+   "e": 12.597,
+   "vo": "Hum regular naye designs ki photo-video bhejte rahenge."
+  },
+  "share": {
+   "s": 12.887,
+   "e": 15.423,
+   "vo": "Aap unhe apne Status aur Instagram pe daalo."
+  },
+  "order": {
+   "s": 15.704,
+   "e": 17.555,
+   "vo": "Customer ka order aaye, tab humse khareedo."
+  },
+  "single": {
+   "s": 17.844,
+   "e": 19.739,
+   "vo": "Ek piece bhi milega, wholesale rate pe."
+  },
+  "price": {
+   "s": 20.038,
+   "e": 23.619,
+   "vo": "Kurti aur suit sets, ₹599 aur ₹999 ke andar."
+  },
+  "margin": {
+   "s": 23.911,
+   "e": 25.566,
+   "vo": "Apna margin jodo, aur becho."
+  },
+  "delivery": {
+   "s": 25.866,
+   "e": 27.76,
+   "vo": "Delivery poore India mein, hum karenge."
+  },
+  "brand": {
+   "s": 28.055,
+   "e": 29.66,
+   "vo": "Aur apna khud ka brand banana hai?"
+  },
+  "brandsetup": {
+   "s": 29.822,
+   "e": 33.701,
+   "vo": "Website, Meta ads, sourcing... wo bhi hum setup karke dete hain."
+  },
+  "festive": {
+   "s": 34.024,
+   "e": 36.295,
+   "vo": "Festive season aa raha hai, abhi shuru karo."
+  },
+  "cta": {
+   "s": 36.618,
+   "e": 38.352,
+   "vo": "Neeche button dabao, aur group se judo!"
+  }
+ },
+ "cues": {
+  "bStrike1": 4.5,
+  "bStrike2": 5.44,
+  "tap1": 13.79,
+  "tap2": 14.693,
+  "o3": 16.87,
+  "eTag": 18.823,
+  "price1": 21.354,
+  "price2": 22.482,
+  "eq2": 24.175,
+  "eq3": 25.078,
+  "g1": 29.822,
+  "g2": 30.5,
+  "g3": 31.29,
+  "gBanner": 32.306,
+  "hGo": 35.38
+ }
 }

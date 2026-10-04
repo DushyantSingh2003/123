@@ -6,3 +6,4 @@ output/render.log
 output/sfx_cues.json
 timeline_final.json
 __pycache__/
+output/vo_alignment.png
