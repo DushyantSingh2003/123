@@ -1,0 +1,25 @@
+{
+  "_note": "Phrase timings (seconds) for the voiceover. The preview uses these planned timings; make_final.py rewrites them from the real voiceover's word timestamps.",
+  "end": 38.6,
+  "phrases": {
+    "hook1":      { "s": 0.00,  "e": 2.10,  "vo": "Roz WhatsApp Status lagati ho na?" },
+    "hook2":      { "s": 2.15,  "e": 3.80,  "vo": "Good morning wale... tyohaar wale..." },
+    "curious":    { "s": 3.95,  "e": 6.75,  "vo": "Socho, agar usi Status se... kapde bikne lagein toh?" },
+    "nostock":    { "s": 6.90,  "e": 8.25,  "vo": "Na dukaan, na bada stock." },
+    "home":       { "s": 8.35,  "e": 9.15,  "vo": "Ghar baithe business!" },
+    "kaise":      { "s": 9.40,  "e": 9.85,  "vo": "Kaise?" },
+    "join":       { "s": 9.95,  "e": 12.10, "vo": "Hamare WhatsApp reseller group se judo." },
+    "designs":    { "s": 12.25, "e": 14.95, "vo": "Hum regular naye designs ki photo-video bhejte rahenge." },
+    "share":      { "s": 15.05, "e": 17.10, "vo": "Aap unhe Status, Instagram, Facebook pe daalo." },
+    "order":      { "s": 17.20, "e": 18.95, "vo": "Customer ka order aaye, tab humse khareedo." },
+    "products":   { "s": 19.10, "e": 21.95, "vo": "Embroidery wale sets, suit sets, trending kurtiyan..." },
+    "single":     { "s": 22.05, "e": 23.85, "vo": "Ek piece bhi milega, wholesale rate pe." },
+    "margin":     { "s": 23.95, "e": 25.45, "vo": "Apna margin jodo, aur becho." },
+    "delivery":   { "s": 25.55, "e": 27.25, "vo": "Delivery poore India mein, hum karenge." },
+    "brand":      { "s": 27.50, "e": 28.95, "vo": "Aur apna khud ka brand banana hai?" },
+    "brandsetup": { "s": 29.05, "e": 32.45, "vo": "Website, Meta ads, sourcing... wo bhi hum setup karke dete hain." },
+    "festive":    { "s": 32.70, "e": 34.75, "vo": "Festive season aa raha hai, abhi shuru karo." },
+    "cta":        { "s": 34.85, "e": 37.05, "vo": "Neeche button dabao, aur WhatsApp group join karo!" }
+  },
+  "cues": {}
+}

@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<title>WhatsApp Reseller Ad</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+body{font-family:Poppins,"Noto Color Emoji",sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;overflow:hidden;visibility:hidden}
+.abs{position:absolute}
+.kb{position:absolute;inset:0;overflow:hidden}
+.kb img{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.emo{font-family:"Noto Color Emoji",sans-serif}
+
+/* ---------- caption (VO subtitles) ---------- */
+#cap{position:absolute;left:50px;right:50px;top:1120px;display:flex;justify-content:center;z-index:50;pointer-events:none}
+#capText{background:rgba(12,12,12,.80);color:#fff;font:700 52px/1.28 Poppins,"Noto Color Emoji";padding:20px 36px 18px;border-radius:30px;text-align:center;max-width:980px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#capText .hl{color:#FFD54A}
+
+/* ---------- Scene A : WhatsApp status ---------- */
+.slide{position:absolute;inset:0;overflow:hidden}
+#a1{background:linear-gradient(170deg,#FFE3B3 0%,#FFB6A1 45%,#F48FB1 100%)}
+.gm-sun{position:absolute;left:540px;top:1000px;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,236,170,.75) 28%,rgba(255,200,120,0) 62%)}
+.gm-title{position:absolute;left:0;right:0;top:840px;text-align:center;font:400 190px/1 "Great Vibes";color:#fff;text-shadow:0 6px 24px rgba(160,40,60,.55)}
+.gm-emo{position:absolute;left:0;right:0;top:1090px;text-align:center;font-size:92px;letter-spacing:6px}
+.gm-sub{position:absolute;left:0;right:0;top:1230px;text-align:center;font:600 54px Poppins,"Noto Color Emoji";color:#7A1E3A}
+#a2{background:radial-gradient(circle at 50% 62%,#C2410C 0%,#8B1538 48%,#3B0A1A 100%)}
+.fe-mandala{position:absolute;left:540px;top:1000px;width:1300px;height:1300px;margin:-650px 0 0 -650px;border-radius:50%;
+  background:repeating-conic-gradient(rgba(255,210,122,.16) 0 6deg,rgba(255,210,122,0) 6deg 15deg);
+  -webkit-mask:radial-gradient(circle,transparent 0 22%,#000 23% 48%,transparent 49%)}
+.fe-diya{position:absolute;left:0;right:0;top:760px;text-align:center;font-size:230px}
+.fe-title{position:absolute;left:0;right:0;top:1020px;text-align:center;font:400 170px/1 "Great Vibes";color:#FFD27A;text-shadow:0 0 30px rgba(255,180,60,.55)}
+.fe-emo{position:absolute;left:0;right:0;top:1230px;text-align:center;font-size:80px;letter-spacing:8px}
+#a3{background:#222}
+.st-capbar{position:absolute;left:0;right:0;top:1500px;text-align:center;font:600 46px Poppins,"Noto Color Emoji";color:#fff;padding:22px 30px;background:rgba(0,0,0,.45)}
+.st-shade{position:absolute;left:0;right:0;top:0;height:330px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0))}
+.st-bars{position:absolute;left:24px;right:24px;top:30px;display:flex;gap:12px}
+.st-bars .bar{flex:1;height:9px;border-radius:5px;background:rgba(255,255,255,.4);overflow:hidden}
+.st-bars .bar i{display:block;height:100%;width:0;background:#fff}
+.st-head{position:absolute;left:30px;top:66px;display:flex;align-items:center;gap:22px}
+.st-head .av{width:104px;height:104px;border-radius:50%;background:#FCE4EC;display:flex;align-items:center;justify-content:center;font-size:64px;border:4px solid #fff}
+.st-head b{display:block;font:700 44px Poppins;color:#fff}
+.st-head span{display:block;font:500 34px Poppins;color:rgba(255,255,255,.85)}
+.st-seen{position:absolute;left:0;right:0;top:1650px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff}
+.st-seen .row{display:flex;align-items:center;gap:16px;font:700 56px Poppins}
+.st-seen small{font:500 34px Poppins;opacity:.9}
+.hook{position:absolute;left:64px;right:40px;top:300px}
+.hook .ln{display:table;background:#fff;color:#111;font:900 104px/1.02 Poppins,"Noto Color Emoji";padding:16px 32px 10px;border-radius:24px;margin:0 0 16px 0;box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.hook em{font-style:normal;color:#14A44D}
+.notif{position:absolute;left:54px;width:972px;background:#fff;border-radius:34px;padding:18px 28px;display:flex;gap:24px;align-items:center;box-shadow:0 20px 44px rgba(0,0,0,.38);opacity:0}
+.notif .nav{flex:none;width:88px;height:88px;border-radius:50%;color:#fff;font:700 50px Poppins;display:flex;align-items:center;justify-content:center}
+.notif .napp{display:block;font:600 26px Poppins;color:#1DAA61;margin-bottom:2px}
+.notif b{display:block;font:700 36px Poppins;color:#111}
+.notif p{font:500 42px/1.2 Poppins,"Noto Color Emoji";color:#2b2b2b}
+
+/* ---------- Scene B : no shop no stock ---------- */
+#sB .dim{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.55) 50%,rgba(0,0,0,.75))}
+.b-head{position:absolute;left:90px;top:420px;font:700 60px Poppins;color:#FFD54A;opacity:0}
+.b-row{position:absolute;left:90px;font:900 128px/1 Poppins;color:#fff;opacity:0}
+.b-row .strike{position:absolute;left:-14px;top:52%;height:16px;border-radius:8px;background:#FF3B3B;width:0;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.b-row .x{display:inline-block;width:96px;height:96px;border-radius:50%;background:#FF3B3B;color:#fff;font:900 64px/96px Poppins;text-align:center;margin-left:26px;vertical-align:14px;transform:scale(0)}
+.b-home{position:absolute;left:70px;right:70px;top:930px;background:#25D366;border-radius:40px;padding:34px 30px 30px;text-align:center;opacity:0;box-shadow:0 24px 60px rgba(37,211,102,.45)}
+.b-home .big{font:900 92px/1.05 Poppins,"Noto Color Emoji";color:#062E1A}
+.b-home .sm{margin-top:10px;font:700 40px Poppins;color:#0B4D2C;letter-spacing:1px}
+
+/* ---------- Scene K : KAISE ---------- */
+#sK{background:#25D366;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#sK .k1{font:900 250px/1 Poppins;color:#fff;text-shadow:0 12px 40px rgba(0,80,40,.45)}
+#sK .k2{font-size:170px;margin-top:20px}
+
+/* ---------- Scene C : WhatsApp chat ---------- */
+.chat{position:absolute;inset:0;background:#EFE7DE;overflow:hidden}
+.chat .wall{position:absolute;inset:0;opacity:.55;background-image:radial-gradient(rgba(120,100,80,.18) 3px,transparent 4px),radial-gradient(rgba(120,100,80,.12) 2px,transparent 3px);background-size:90px 90px,60px 60px;background-position:0 0,30px 45px}
+.wa-head{position:absolute;left:0;right:0;top:0;height:250px;background:#008069;z-index:5}
+.wa-sbar{position:absolute;left:44px;right:44px;top:22px;display:flex;justify-content:space-between;font:600 34px Poppins;color:#fff}
+.wa-hrow{position:absolute;left:24px;right:30px;top:96px;display:flex;align-items:center;gap:22px}
+.wa-hrow .back{font:600 64px Poppins;color:#fff;width:40px}
+.wa-hrow .gav{width:116px;height:116px;border-radius:50%;background:#fff center/cover no-repeat;flex:none;display:flex;align-items:center;justify-content:center;font:700 54px Poppins;color:#fff}
+.wa-hrow b{display:block;font:700 46px Poppins,"Noto Color Emoji";color:#fff;white-space:nowrap}
+.wa-hrow span{display:block;font:500 32px Poppins;color:rgba(255,255,255,.85);white-space:nowrap}
+.wa-input{position:absolute;left:20px;right:20px;top:1790px;height:110px;display:flex;gap:16px;z-index:5}
+.wa-input .box{flex:1;background:#fff;border-radius:55px;font:500 40px/110px Poppins;color:#999;padding-left:44px}
+.wa-input .mic{width:110px;height:110px;border-radius:50%;background:#00A884;color:#fff;font-size:52px;display:flex;align-items:center;justify-content:center}
+.msgs{position:absolute;left:0;right:0;top:0}
+.m{position:absolute;opacity:0}
+.sys{left:50%;width:760px;margin-left:-380px;text-align:center;background:#FFF5C4;color:#54656F;font:500 34px Poppins;padding:14px 20px;border-radius:20px;box-shadow:0 2px 3px rgba(0,0,0,.08)}
+.bub{background:#fff;border-radius:0 30px 30px 30px;padding:20px 28px 16px;box-shadow:0 2px 4px rgba(0,0,0,.12);color:#111;font:500 42px/1.3 Poppins,"Noto Color Emoji";max-width:860px}
+.bub.out{background:#D9FDD3;border-radius:30px 0 30px 30px}
+.bub .who{font:700 34px Poppins;color:#C2185B;margin-bottom:4px}
+.bub .tm{font:400 26px Poppins;color:#888;text-align:right;margin-top:4px}
+.album{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:700px}
+.album .cell{position:relative;height:360px;border-radius:14px;overflow:hidden;opacity:0}
+.album .cell img{width:100%;height:100%;object-fit:cover}
+.album .more{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;font:700 96px/360px Poppins;text-align:center}
+.vid{position:relative;width:700px;height:520px;border-radius:14px;overflow:hidden}
+.vid img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.vid .play{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.vid .play:after{content:"";border-left:56px solid #fff;border-top:34px solid transparent;border-bottom:34px solid transparent;margin-left:14px}
+.vid .dur{position:absolute;left:18px;bottom:14px;font:600 32px Poppins;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.badge{position:absolute;left:50%;top:290px;z-index:20;display:flex;align-items:center;gap:22px;background:#fff;border-radius:70px;padding:16px 40px 16px 16px;box-shadow:0 16px 40px rgba(0,0,0,.25);white-space:nowrap;transform:translateX(-50%)}
+.badge .num{width:104px;height:104px;border-radius:50%;background:#25D366;color:#fff;font:900 60px/104px Poppins;text-align:center}
+.badge .btxt{font:800 52px/1.1 Poppins,"Noto Color Emoji";color:#111}
+.badge .btxt small{display:block;font:700 30px Poppins;color:#008069;letter-spacing:2px}
+.shade{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;z-index:8}
+.share{position:absolute;left:60px;right:60px;top:560px;background:#fff;border-radius:50px;padding:46px 30px 50px;z-index:9;opacity:0;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.share h3{font:800 56px Poppins,"Noto Color Emoji";color:#111;text-align:center;margin-bottom:40px}
+.share .apps{display:flex;justify-content:space-around}
+.app{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;font:700 40px Poppins;color:#222}
+.ico{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center}
+.ico.st{border-radius:50%;background:#25D366}
+.ico.st:before{content:"";width:120px;height:120px;border-radius:50%;border:12px dashed #fff}
+.ico.ig{border-radius:60px;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+.ico.ig:before{content:"";width:118px;height:118px;border:13px solid #fff;border-radius:36px}
+.ico.ig:after{content:"";position:absolute;width:44px;height:44px;border:12px solid #fff;border-radius:50%}
+.ico.fb{border-radius:50%;background:#1877F2;color:#fff;font:900 170px/1 Arial,sans-serif;padding-top:30px}
+.tick{position:absolute;right:-6px;top:-6px;width:84px;height:84px;border-radius:50%;background:#00A884;color:#fff;font:900 50px/84px Poppins;text-align:center;border:6px solid #fff;transform:scale(0)}
+.ripple{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;border:10px solid rgba(255,255,255,.95);opacity:0}
+.hand{position:absolute;font-size:150px;z-index:30;opacity:0;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.toast{position:absolute;left:50%;top:1250px;transform:translateX(-50%);background:#111;color:#fff;font:700 46px Poppins,"Noto Color Emoji";padding:22px 46px;border-radius:50px;z-index:12;opacity:0;white-space:nowrap}
+.stamp{position:absolute;left:50%;top:1170px;z-index:12;background:#FFD54A;color:#111;font:900 76px/1 Poppins,"Noto Color Emoji";padding:30px 50px 24px;border-radius:30px;border:8px solid #111;white-space:nowrap;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.quote{background:#F0F0F0;border-left:10px solid #C2185B;border-radius:14px;display:flex;align-items:center;gap:20px;padding:12px 14px 12px 22px;margin-bottom:12px;width:640px}
+.quote div{flex:1;font:600 32px/1.3 Poppins,"Noto Color Emoji";color:#555}
+.quote div b{display:block;color:#C2185B;font:700 32px Poppins}
+.quote img{width:130px;height:170px;object-fit:cover;object-position:50% 20%;border-radius:10px}
+
+/* ---------- Scene D : products ---------- */
+.dshot{position:absolute;inset:0;overflow:hidden;opacity:0}
+.dshot .grad{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,.35))}
+.dstamp{position:absolute;left:50%;top:300px;z-index:10;background:#fff;color:#111;font:900 76px/1 Poppins,"Noto Color Emoji";padding:26px 46px 20px;border-radius:26px;white-space:nowrap;box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.dstamp em{font-style:normal;color:#C2185B}
+.dtag{position:absolute;left:60px;top:440px;z-index:10;background:#C2185B;color:#fff;font:700 44px Poppins,"Noto Color Emoji";padding:14px 30px;border-radius:40px;opacity:0;white-space:nowrap}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:20;pointer-events:none}
+
+/* ---------- Scene E : single piece + margin ---------- */
+#sE{background:radial-gradient(circle at 50% 35%,#FFFFFF 0%,#FFF3E6 45%,#FFE0CC 100%)}
+.pcard{position:absolute;left:50%;top:300px;width:620px;height:830px;margin-left:-310px;border-radius:44px;overflow:hidden;border:14px solid #fff;box-shadow:0 30px 70px rgba(120,40,40,.28);transform-origin:50% 0}
+.pcard img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.sticker{position:absolute;left:90px;top:300px;z-index:4;background:#FFD23F;color:#111;font:900 64px/1.02 Poppins,"Noto Color Emoji";padding:24px 34px 18px;border-radius:24px;border:7px solid #111;text-align:center;opacity:0}
+.sticker small{display:block;font:800 34px Poppins;letter-spacing:2px}
+.ptag{position:absolute;left:500px;top:850px;z-index:4;background:#C2185B;color:#fff;font:900 60px/1.05 Poppins;padding:26px 40px 22px 64px;border-radius:20px 50px 50px 20px;opacity:0;box-shadow:0 18px 40px rgba(194,24,91,.4)}
+.ptag:before{content:"";position:absolute;left:22px;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;background:#FFF3E6}
+.ptag small{display:block;font:700 32px Poppins;letter-spacing:2px;opacity:.9}
+.eq{position:absolute;left:70px;right:70px;opacity:0;display:flex;align-items:center;gap:26px}
+.eq .op{flex:none;width:96px;height:96px;border-radius:50%;background:#111;color:#fff;font:900 70px/92px Poppins;text-align:center}
+.eq .chip{flex:1;border-radius:30px;padding:26px 34px 22px;font:800 58px/1.1 Poppins,"Noto Color Emoji"}
+.eq .c1{background:#fff;color:#111;border:5px solid #111}
+.eq .c2{background:#25D366;color:#062E1A}
+.eq .c3{background:#111;color:#FFD54A}
+
+/* ---------- Scene F : delivery ---------- */
+#sF{background:radial-gradient(circle at 50% 55%,#17806C 0%,#0D4F43 55%,#062922 100%)}
+#sF .dots{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(#fff 2px,transparent 3px);background-size:44px 44px}
+.f-title{position:absolute;left:0;right:0;top:300px;text-align:center;font:900 116px/1.02 Poppins;color:#fff;opacity:0}
+.f-title em{font-style:normal;color:#FFB347}
+.f-box{position:absolute;left:50%;top:600px;width:300px;margin-left:-150px;text-align:center;font-size:250px;line-height:1;opacity:0}
+.f-truck{position:absolute;top:880px;font-size:160px;line-height:1}
+.f-road{position:absolute;left:0;right:0;top:1040px;height:10px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 60px,transparent 60px 110px)}
+.city{position:absolute;background:#fff;color:#0D4F43;font:700 38px Poppins,"Noto Color Emoji";padding:12px 24px;border-radius:40px;white-space:nowrap;opacity:0;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+
+/* ---------- Scene G : own brand ---------- */
+#sG{background:linear-gradient(165deg,#FFF7EE 0%,#F9E6F0 55%,#EBDDF8 100%)}
+.g-head{position:absolute;left:60px;right:60px;top:270px;font:900 92px/1.04 Poppins,"Noto Color Emoji";color:#1A1033;opacity:0}
+.g-head em{font-style:normal;color:#C2185B}
+.phone{position:absolute;left:60px;top:640px;width:520px;height:1060px;border-radius:64px;background:#111;padding:18px;box-shadow:0 40px 80px rgba(60,20,80,.35);opacity:0}
+.screen{position:relative;width:100%;height:100%;border-radius:48px;overflow:hidden;background:#fff}
+.site{position:absolute;left:0;right:0;top:0}
+.site .url{height:84px;background:#F1F1F1;margin:16px;border-radius:42px;font:600 26px/84px Poppins,"Noto Color Emoji";color:#555;text-align:center}
+.site .logo{font:400 70px/1 "Great Vibes";color:#C2185B;text-align:center;padding:10px 0 14px}
+.site .hero{position:relative;height:380px;margin:0 16px;border-radius:24px;overflow:hidden}
+.site .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.site .hero div{position:absolute;left:22px;bottom:20px;font:800 38px/1.1 Poppins;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.site .hero span{display:inline-block;margin-top:10px;background:#fff;color:#C2185B;font:700 24px Poppins;padding:8px 18px;border-radius:20px;text-shadow:none}
+.site .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 16px}
+.site .it img{width:100%;height:260px;object-fit:cover;object-position:50% 25%;border-radius:18px}
+.site .it b{display:block;font:700 22px Poppins;color:#222;margin-top:6px}
+.site .it span{display:block;background:#111;color:#fff;font:600 20px/40px Poppins;text-align:center;border-radius:20px;margin-top:6px}
+.gcard{position:absolute;left:610px;width:420px;background:#fff;border-radius:36px;padding:26px 28px 24px;box-shadow:0 20px 50px rgba(60,20,80,.22);opacity:0}
+.gcard .gi{font-size:76px;line-height:1}
+.gcard b{display:block;font:800 46px/1.1 Poppins;color:#1A1033;margin-top:10px}
+.gcard span{display:block;font:600 30px/1.25 Poppins;color:#6B5B7B;margin-top:6px}
+.gcard .ok{position:absolute;right:22px;top:22px;width:70px;height:70px;border-radius:50%;background:#25D366;color:#fff;font:900 42px/70px Poppins;text-align:center}
+.g-banner{position:absolute;left:60px;right:60px;top:300px;background:#111;color:#fff;border-radius:34px;padding:30px 34px 26px;text-align:center;font:800 58px/1.1 Poppins,"Noto Color Emoji";opacity:0;z-index:5}
+.g-banner em{font-style:normal;color:#25D366}
+
+/* ---------- Scene H1 : festive ---------- */
+#sH1{background:radial-gradient(circle at 50% 40%,#9B1B3A 0%,#5E0F25 50%,#2A0712 100%)}
+.bokeh{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,120,.85),rgba(255,214,120,0) 70%)}
+.h-title{position:absolute;left:0;right:0;top:290px;text-align:center;opacity:0}
+.h-title .t1{font:900 112px/1 Poppins,"Noto Color Emoji";color:#FFD27A;text-shadow:0 0 34px rgba(255,190,80,.5)}
+.h-title .t2{font:700 60px/1.2 Poppins;color:#fff;margin-top:14px}
+.fcard{position:absolute;top:620px;width:420px;height:580px;border-radius:30px;overflow:hidden;border:10px solid #FFE3A3;box-shadow:0 30px 60px rgba(0,0,0,.5);opacity:0}
+.fcard img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.h-go{position:absolute;left:50%;top:1290px;background:#FFD27A;color:#3B0A1A;font:900 72px/1 Poppins,"Noto Color Emoji";padding:28px 54px 24px;border-radius:60px;white-space:nowrap;opacity:0}
+.diyas{position:absolute;left:0;right:0;top:1440px;text-align:center;font-size:96px;letter-spacing:30px}
+
+/* ---------- Scene H2 : CTA ---------- */
+#sH2{background:linear-gradient(175deg,#0A3D30 0%,#0E5C48 55%,#128C7E 100%)}
+.strip{position:absolute;left:0;right:0;top:290px;height:330px}
+.thumb{position:absolute;top:0;width:200px;height:300px;border-radius:24px;overflow:hidden;border:6px solid #fff;box-shadow:0 14px 30px rgba(0,0,0,.35);opacity:0}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.cta-h{position:absolute;left:40px;right:40px;top:660px;text-align:center;opacity:0}
+.cta-h .c1{font:700 48px Poppins;color:#B9F5D0;white-space:nowrap}
+.cta-h .c2{font:900 84px/1.05 Poppins,"Noto Color Emoji";color:#fff;margin-top:6px}
+.btn{position:absolute;left:70px;right:70px;top:960px;height:200px;border-radius:100px;background:#25D366;display:flex;align-items:center;justify-content:center;gap:28px;opacity:0;box-shadow:0 0 0 0 rgba(37,211,102,.6),0 24px 50px rgba(0,0,0,.35)}
+.btn .wa{width:120px;height:120px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.btn .wa svg{width:84px;height:84px}
+.btn b{font:900 72px/1 Poppins;color:#fff;text-shadow:0 2px 8px rgba(0,80,40,.35)}
+.checks{position:absolute;left:70px;right:70px;top:1200px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.checks div{background:rgba(255,255,255,.12);border:3px solid rgba(255,255,255,.25);border-radius:26px;padding:16px 20px;font:700 36px/1.2 Poppins,"Noto Color Emoji";color:#fff;opacity:0}
+.checks div i{font-style:normal;color:#25D366}
+.down{position:absolute;left:0;right:0;top:1400px;text-align:center;opacity:0}
+.down b{display:block;font:800 54px Poppins,"Noto Color Emoji";color:#FFD54A}
+.down .arr{font-size:120px;line-height:1.1}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- ===================== SCENE A : WHATSAPP STATUS HOOK ===================== -->
+<div class="scene" id="sA">
+  <div class="slide" id="a1">
+    <div class="gm-sun"></div>
+    <div class="gm-title">Good Morning</div>
+    <div class="gm-emo">🌸🌼🌺🌼🌸</div>
+    <div class="gm-sub">Aapka din shubh ho 🙏</div>
+  </div>
+  <div class="slide" id="a2">
+    <div class="fe-mandala" id="mandala"></div>
+    <div class="fe-diya">🪔</div>
+    <div class="fe-title">Shubh Navratri</div>
+    <div class="fe-emo">🌼✨🌼✨🌼</div>
+  </div>
+  <div class="slide" id="a3">
+    <div class="kb"><img id="a3img" src="assets/p1_blue_tassel_set.jpg"></div>
+    <div class="st-capbar">New Arrival 💙 Price ke liye message karo</div>
+  </div>
+  <div class="st-shade"></div>
+  <div class="st-bars"><div class="bar"><i id="bar1"></i></div><div class="bar"><i id="bar2"></i></div><div class="bar"><i id="bar3"></i></div></div>
+  <div class="st-head"><div class="av">👩🏻</div><div><b>My status</b><span id="sttime">Abhi abhi</span></div></div>
+  <div class="st-seen"><div class="row">
+      <svg width="64" height="40" viewBox="0 0 64 40"><path d="M32 2C17 2 6 13 2 20c4 7 15 18 30 18s26-11 30-18C58 13 47 2 32 2z" fill="none" stroke="#fff" stroke-width="5"/><circle cx="32" cy="20" r="9" fill="#fff"/></svg>
+      <span id="seenN">0</span></div><small>Seen by</small></div>
+  <div class="hook" id="hook">
+    <div class="ln" id="hk1">Roz <em>WhatsApp</em></div>
+    <div class="ln" id="hk2"><em>Status</em> lagati</div>
+    <div class="ln" id="hk3">ho? 👀</div>
+  </div>
+  <div class="notif" id="n1" style="top:700px"><div class="nav" style="background:#E91E63">N</div><div><span class="napp">💬 WhatsApp · now</span><b>Neha</b><p>Ye kitne ka hai? 😍</p></div></div>
+  <div class="notif" id="n2" style="top:880px"><div class="nav" style="background:#7E57C2">S</div><div><span class="napp">💬 WhatsApp · now</span><b>Sunita Aunty</b><p>Mujhe bhi chahiye! M size? 🙏</p></div></div>
+</div>
+
+<!-- ===================== SCENE B : NO SHOP / NO STOCK ===================== -->
+<div class="scene" id="sB">
+  <div class="kb"><img id="bimg" src="assets/p2_beige_floral_shirt_set.jpg"></div>
+  <div class="dim"></div>
+  <div class="b-head" id="bhead">Zaroorat NAHI 👇</div>
+  <div class="b-row" id="br1" style="top:530px"><span style="position:relative">Dukaan<i class="strike" id="bs1"></i></span><span class="x" id="bx1">✕</span></div>
+  <div class="b-row" id="br2" style="top:700px"><span style="position:relative">Bada stock<i class="strike" id="bs2"></i></span><span class="x" id="bx2">✕</span></div>
+  <div class="b-home" id="bhome"><div class="big">✅ GHAR SE BUSINESS</div><div class="sm">HOME BUSINESS · NO BIG INVENTORY</div></div>
+</div>
+
+<!-- ===================== SCENE K : KAISE ===================== -->
+<div class="scene" id="sK"><div class="k1" id="k1">KAISE?</div><div class="k2" id="k2">👇</div></div>
+
+<!-- ===================== SCENE C : GROUP CHAT ===================== -->
+<div class="scene" id="sC">
+  <div class="chat"><div class="wall"></div>
+    <div class="msgs" id="cmsgs">
+      <div class="m sys" id="cm1" style="top:450px">You joined using this group's invite link</div>
+      <div class="m bub" id="cm2" style="left:30px;top:550px"><div class="who">Admin</div>Welcome 🙏 Naye designs yahan milte rahenge 👗<div class="tm">10:02 am</div></div>
+      <div class="m bub" id="cm3" style="left:30px;top:800px;padding:10px 10px 12px"><div class="who" style="padding:4px 14px">Admin</div>
+        <div class="album">
+          <div class="cell" id="al1"><img src="assets/p4_pink_embroidered_set.jpg" style="object-position:50% 30%"></div>
+          <div class="cell" id="al2"><img src="assets/p5_beige_vest_set.jpg" style="object-position:50% 35%"></div>
+          <div class="cell" id="al3"><img src="assets/p3_white_blue_print_suit.jpg" style="object-position:50% 35%"></div>
+          <div class="cell" id="al4"><img src="assets/p2_beige_floral_shirt_set.jpg" style="object-position:50% 35%"><div class="more">+12</div></div>
+        </div>
+        <div style="padding:10px 16px 0;font:600 38px Poppins">✨ New designs</div></div>
+      <div class="m bub" id="cm4" style="left:30px;top:1720px;padding:10px 10px 12px"><div class="who" style="padding:4px 14px">Admin</div>
+        <div class="vid"><img src="assets/p1_blue_tassel_set.jpg"><div class="play"></div><div class="dur">🎥 0:15</div></div>
+        <div style="padding:10px 16px 0;font:600 38px Poppins,'Noto Color Emoji'">Video bhi 🎥 Status pe lagao</div></div>
+    </div>
+    <div class="wa-head"><div class="wa-sbar"><span>10:02</span><span>📶 🔋</span></div>
+      <div class="wa-hrow" id="chead1"><div class="back">‹</div><div class="gav" style="background-image:url(assets/p4_pink_embroidered_set.jpg);background-position:50% 22%;background-size:180%"></div><div><b>Reseller Group 👗✨</b><span>Admin, Neha, Pooja, You</span></div></div>
+    </div>
+    <div class="wa-input"><div class="box">Message</div><div class="mic">🎤</div></div>
+    <div class="shade" id="cshade"></div>
+    <div class="share" id="cshare"><h3>Share karo 👇</h3>
+      <div class="apps">
+        <div class="app"><div class="ico st" id="ic1"><div class="ripple" id="rp1"></div><div class="tick" id="tk1">✓</div></div>Status</div>
+        <div class="app"><div class="ico ig" id="ic2"><div class="ripple" id="rp2"></div><div class="tick" id="tk2">✓</div></div>Instagram</div>
+        <div class="app"><div class="ico fb" id="ic3">f<div class="ripple" id="rp3"></div><div class="tick" id="tk3">✓</div></div>Facebook</div>
+      </div></div>
+    <div class="toast" id="ctoast">✅ Shared! Ab customers dekhenge 👀</div>
+  </div>
+  <div class="hand" id="chand">👆</div>
+  <div class="badge" id="cbadge"><div class="num" id="cbnum">1</div><div class="btxt" id="cbtxt"><small>STEP 1</small>GROUP JOIN KARO</div></div>
+</div>
+
+<!-- ===================== SCENE C3 : CUSTOMER ORDER ===================== -->
+<div class="scene" id="sC3">
+  <div class="chat"><div class="wall"></div>
+    <div class="m bub" id="om1" style="left:30px;top:440px">
+      <div class="quote"><div><b>You · Status</b>New Arrival 💙 Price ke liye message karo</div><img src="assets/p1_blue_tassel_set.jpg"></div>
+      Ye blue wala set chahiye 😍<div class="tm">10:41 am</div></div>
+    <div class="m bub" id="om2" style="left:30px;top:850px">Size M bhej do please 🙏<div class="tm">10:41 am</div></div>
+    <div class="m bub out" id="om3" style="right:30px;top:990px">Done ✅ Order confirm!<div class="tm">10:42 am ✓✓</div></div>
+    <div class="wa-head"><div class="wa-sbar"><span>10:42</span><span>📶 🔋</span></div>
+      <div class="wa-hrow"><div class="back">‹</div><div class="gav" style="background:#E91E63">N</div><div><b>Neha (Customer) 🛍️</b><span>online</span></div></div>
+    </div>
+    <div class="wa-input"><div class="box">Message</div><div class="mic">🎤</div></div>
+  </div>
+  <div class="stamp" id="ostamp">ORDER AAYA! 🎉</div>
+  <div class="badge" id="obadge"><div class="num">4</div><div class="btxt"><small>STEP 4</small>ORDER AAYE, TAB KHAREEDO</div></div>
+</div>
+
+<!-- ===================== SCENE D : PRODUCT MONTAGE ===================== -->
+<div class="scene" id="sD">
+  <div class="dshot" id="d1"><div class="kb"><img id="d1img" src="assets/p1_blue_tassel_set.jpg"></div><div class="grad"></div></div>
+  <div class="dshot" id="d2"><div class="kb"><img id="d2img" src="assets/p4_pink_embroidered_set.jpg"></div><div class="grad"></div></div>
+  <div class="dshot" id="d3"><div class="kb"><img id="d3img" src="assets/p3_white_blue_print_suit.jpg"></div><div class="grad"></div></div>
+  <div class="dshot" id="d4"><div class="kb"><img id="d4img" src="assets/p5_beige_vest_set.jpg"></div><div class="grad"></div></div>
+  <div class="dshot" id="d5"><div class="kb"><img id="d5img" src="assets/p2_beige_floral_shirt_set.jpg"></div><div class="grad"></div></div>
+  <div class="dstamp" id="dstamp">TRENDING <em>DESIGNS</em> ✨</div>
+  <div class="dtag" id="dtag">Embroidery ✨</div>
+  <div class="flash" id="dflash"></div>
+</div>
+
+<!-- ===================== SCENE E : SINGLE PIECE + MARGIN ===================== -->
+<div class="scene" id="sE">
+  <div class="pcard" id="epc"><img src="assets/p4_pink_embroidered_set.jpg"></div>
+  <div class="sticker" id="estk"><small>SINGLE PIECE</small>1 PIECE BHI ✓</div>
+  <div class="ptag" id="etag"><small>MILEGA</small>WHOLESALE RATE</div>
+  <div class="eq" id="eq1" style="top:900px"><div class="chip c1">Wholesale rate</div></div>
+  <div class="eq" id="eq2" style="top:1045px"><div class="op">+</div><div class="chip c2">Aapka margin 💚</div></div>
+  <div class="eq" id="eq3" style="top:1190px"><div class="op">=</div><div class="chip c3">Aapka price ✓</div></div>
+</div>
+
+<!-- ===================== SCENE F : PAN INDIA DELIVERY ===================== -->
+<div class="scene" id="sF">
+  <div class="dots"></div>
+  <div class="f-title" id="ftitle">PAN <em>INDIA</em><br>DELIVERY</div>
+  <div class="f-box" id="fbox">📦</div>
+  <div class="f-road"></div>
+  <div class="f-truck" id="ftruck">🚚</div>
+  <div id="cities"></div>
+</div>
+
+<!-- ===================== SCENE G : OWN BRAND ===================== -->
+<div class="scene" id="sG">
+  <div class="g-head" id="ghead">Apna khud ka<br><em>BRAND</em> banana<br>hai? 👑</div>
+  <div class="phone" id="gphone"><div class="screen"><div class="site" id="gsite">
+    <div class="url">🔒 Aapka Brand · Shop</div>
+    <div class="logo">Aapka Brand</div>
+    <div class="hero"><img src="assets/p3_white_blue_print_suit.jpg"><div>Festive Collection<br><span>Shop Now</span></div></div>
+    <div class="grid">
+      <div class="it"><img src="assets/p1_blue_tassel_set.jpg"><b>Tassel Co-ord Set</b><span>Add to Cart</span></div>
+      <div class="it"><img src="assets/p4_pink_embroidered_set.jpg"><b>Embroidered Set</b><span>Add to Cart</span></div>
+      <div class="it"><img src="assets/p5_beige_vest_set.jpg"><b>Floral Vest Set</b><span>Add to Cart</span></div>
+      <div class="it"><img src="assets/p2_beige_floral_shirt_set.jpg"><b>Floral Shirt Set</b><span>Add to Cart</span></div>
+    </div></div></div></div>
+  <div class="gcard" id="gc1" style="top:660px"><div class="gi">🌐</div><b>Website</b><span>Apni online dukaan</span><div class="ok">✓</div></div>
+  <div class="gcard" id="gc2" style="top:920px"><div class="gi">📢</div><b>Meta Ads</b><span>Naye customers ke liye</span><div class="ok">✓</div></div>
+  <div class="gcard" id="gc3" style="top:1180px"><div class="gi">🧵</div><b>Sourcing</b><span>Kapde hum denge</span><div class="ok">✓</div></div>
+  <div class="g-banner" id="gbanner">Sab setup <em>HUM</em> karke denge ✓</div>
+</div>
+
+<!-- ===================== SCENE H1 : FESTIVE URGENCY ===================== -->
+<div class="scene" id="sH1">
+  <div id="bokehs"></div>
+  <div class="h-title" id="htitle"><div class="t1">FESTIVE SEASON</div><div class="t2">aa raha hai! 🪔</div></div>
+  <div class="fcard" id="fc1" style="left:40px"><img src="assets/p4_pink_embroidered_set.jpg"></div>
+  <div class="fcard" id="fc3" style="left:620px"><img src="assets/p3_white_blue_print_suit.jpg"></div>
+  <div class="fcard" id="fc2" style="left:330px"><img src="assets/p1_blue_tassel_set.jpg"></div>
+  <div class="h-go" id="hgo">Abhi shuru karo 🚀</div>
+  <div class="diyas">🪔🪔🪔</div>
+</div>
+
+<!-- ===================== SCENE H2 : CTA ===================== -->
+<div class="scene" id="sH2">
+  <div class="strip" id="strip">
+    <div class="thumb" style="left:20px"><img src="assets/p4_pink_embroidered_set.jpg"></div>
+    <div class="thumb" style="left:228px"><img src="assets/p1_blue_tassel_set.jpg"></div>
+    <div class="thumb" style="left:436px"><img src="assets/p3_white_blue_print_suit.jpg"></div>
+    <div class="thumb" style="left:644px"><img src="assets/p5_beige_vest_set.jpg"></div>
+    <div class="thumb" style="left:852px"><img src="assets/p2_beige_floral_shirt_set.jpg"></div>
+  </div>
+  <div class="cta-h" id="ctah"><div class="c1">Ghar baithe kapdon ka business</div><div class="c2">WhatsApp<br>Reseller Group</div></div>
+  <div class="btn" id="cbtn"><div class="wa"><svg viewBox="0 0 64 64"><path d="M32 6C17.6 6 6 17.3 6 31.3c0 4.9 1.4 9.4 3.9 13.3L6 58l13.9-3.7c3.6 1.9 7.7 3 12.1 3 14.4 0 26-11.3 26-25.3S46.4 6 32 6z" fill="#25D366"/><path d="M24.5 19.5c-.6-1.3-1.2-1.3-1.8-1.3h-1.5c-.5 0-1.4.2-2.1 1-.7.8-2.7 2.6-2.7 6.4s2.8 7.4 3.2 7.9c.4.5 5.4 8.4 13.3 11.5 6.6 2.6 7.9 2.1 9.3 1.9 1.4-.1 4.6-1.9 5.3-3.7.7-1.8.7-3.4.5-3.7-.2-.3-.7-.5-1.5-.9s-4.6-2.3-5.3-2.5c-.7-.3-1.2-.4-1.7.4-.5.8-2 2.5-2.4 3-.4.5-.9.6-1.7.2-.8-.4-3.3-1.2-6.2-3.8-2.3-2-3.9-4.6-4.3-5.4-.4-.8 0-1.2.4-1.6.4-.4.8-.9 1.2-1.4.4-.5.5-.8.8-1.3.3-.5.1-1-.1-1.4-.2-.4-1.6-4.2-2.3-5.7z" fill="#fff"/></svg></div><b>GROUP JOIN KARO</b></div>
+  <div class="hand" id="hhand">👆</div>
+  <div class="checks" id="checks">
+    <div>✓ <i>1 piece</i> bhi</div><div>✓ <i>Wholesale</i> rate</div>
+    <div>✓ <i>Pan India</i> delivery</div><div>✓ <i>Website + Ads</i> setup</div>
+  </div>
+  <div class="down" id="down"><b>Neeche button dabao</b><div class="arr">👇</div></div>
+</div>
+
+<div id="cap"><div id="capText"></div></div>
+</div>
+
+<script>
+const W=1080,H=1920;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const eio=t=>{t=clamp(t);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+const eback=t=>{t=clamp(t);const c1=1.9,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const prog=(t,a,d)=>clamp((t-a)/d);
+const css=(el,o)=>{for(const k in o) el.style[k]=o[k];};
+
+/* pop an element in at time `at`; base = extra transform appended (e.g. rotate) */
+function pop(el,t,at,{dur=.38,dx=0,dy=0,s0=.55,base='',fade=.12}={}){
+  if(t<at){el.style.opacity=0;return 0}
+  const p=prog(t,at,dur), e=eo(p);
+  el.style.opacity=clamp((t-at)/fade);
+  el.style.transform=`${base} translate(${dx*(1-e)}px,${dy*(1-e)}px) scale(${lerp(s0,1,eback(p))})`;
+  return p;
+}
+function hide(el,t,at,{dur=.2,base=''}={}){
+  if(t<at) return; const p=prog(t,at,dur);
+  el.style.opacity=Math.min(parseFloat(el.style.opacity||1),1-p);
+}
+/* Ken-Burns: show rect r (fractions of image) covering a W x H box, interpolated r0->r1 */
+function kb(img,r0,r1,p,bw=W,bh=H){
+  const iw=img.naturalWidth,ih=img.naturalHeight; if(!iw) return;
+  const r={x:lerp(r0.x,r1.x,p),y:lerp(r0.y,r1.y,p),w:lerp(r0.w,r1.w,p),h:lerp(r0.h,r1.h,p)};
+  const s=Math.max(bw/(r.w*iw),bh/(r.h*ih));
+  let L=bw/2-(r.x+r.w/2)*iw*s, T=bh/2-(r.y+r.h/2)*ih*s;
+  L=Math.min(0,Math.max(bw-iw*s,L)); T=Math.min(0,Math.max(bh-ih*s,T));
+  img.style.width=iw+'px'; img.style.height=ih+'px';
+  img.style.transform=`translate(${L}px,${T}px) scale(${s})`;
+}
+const FULL={x:0,y:0,w:1,h:1};
+
+/* ------------------------------------------------------------------ timeline */
+let TL,P,EV,SC,CUES;
+function at(id,f){const p=P[id];return p.s+f*(p.e-p.s);}
+function setTimeline(tl){
+  TL=tl;P=tl.phrases;const c=tl.cues||{};const cue=(k,v)=>(c[k]!==undefined?c[k]:v);
+  EV={
+    swipe1:P.hook2.s, swipe2:P.curious.s,
+    n1:cue('n1',at('curious',.40)), n2:cue('n2',at('curious',.68)),
+    bStrike1:cue('bStrike1',at('nostock',.32)), bRow2:at('nostock',.42), bStrike2:cue('bStrike2',at('nostock',.86)), bHome:P.home.s,
+    cSys:P.join.s+.25, cWelcome:at('join',.55),
+    cAlbum:cue('cAlbum',at('designs',.05)), cVideo:cue('cVideo',at('designs',.62)),
+    cShare:P.share.s, tap1:cue('tap1',at('share',.22)), tap2:cue('tap2',at('share',.47)), tap3:cue('tap3',at('share',.70)), cShared:at('share',.90),
+    o1:P.order.s-.02, o2:at('order',.38), o3:cue('o3',at('order',.62)), oStamp:at('order',.66),
+    d2:cue('d2',at('products',.20)), d3:cue('d3',at('products',.40)), d4:cue('d4',at('products',.62)), d5:cue('d5',at('products',.82)),
+    eSticker:at('single',.10), eTag:cue('eTag',at('single',.52)), eq1:P.margin.s-.05, eq2:cue('eq2',at('margin',.22)), eq3:cue('eq3',at('margin',.62)),
+    fChips:at('delivery',.12),
+    g1:cue('g1',at('brandsetup',.02)), g2:cue('g2',at('brandsetup',.20)), g3:cue('g3',at('brandsetup',.40)), gBanner:cue('gBanner',at('brandsetup',.62)),
+    hGo:cue('hGo',at('festive',.62)),
+    ctaTap:cue('ctaTap',at('cta',.30)),
+  };
+  SC={
+    A:[0,P.nostock.s-.12], B:[P.nostock.s-.12,P.kaise.s-.06], K:[P.kaise.s-.06,P.join.s-.05],
+    C:[P.join.s-.05,P.order.s-.1], C3:[P.order.s-.1,P.products.s-.08], D:[P.products.s-.08,P.single.s-.08],
+    E:[P.single.s-.08,P.delivery.s-.08], F:[P.delivery.s-.08,P.brand.s-.1], G:[P.brand.s-.1,P.festive.s-.1],
+    H1:[P.festive.s-.1,P.cta.s-.08], H2:[P.cta.s-.08,tl.end+1]
+  };
+  CUES=[
+    ['notify',0.02],['whoosh',EV.swipe1-.06],['whoosh',EV.swipe2-.06],
+    ['notify',EV.n1],['notify',EV.n2],
+    ['whoosh',SC.B[0]-.05],['swipe',EV.bStrike1],['swipe',EV.bStrike2],['thump',EV.bHome],
+    ['whoosh',SC.K[0]-.04],['pop',SC.K[0]+.02],['whoosh',SC.C[0]-.05],
+    ['pop',EV.cSys],['pop',EV.cWelcome],['pop',EV.cAlbum],['pop',EV.cAlbum+.22],['pop',EV.cAlbum+.44],['pop',EV.cAlbum+.66],['pop',EV.cVideo],
+    ['whoosh',EV.cShare],['tap',EV.tap1],['tap',EV.tap2],['tap',EV.tap3],['chime',EV.cShared],
+    ['whoosh',SC.C3[0]-.04],['pop',EV.o1+.05],['pop',EV.o2],['send',EV.o3],['thump',EV.oStamp],
+    ['whoosh',SC.D[0]-.05],['shutter',EV.d2],['shutter',EV.d3],['shutter',EV.d4],['shutter',EV.d5],
+    ['whoosh',SC.E[0]-.05],['thump',EV.eSticker],['thump',EV.eTag],['pop',EV.eq1],['pop',EV.eq2],['pop',EV.eq3],
+    ['whoosh',SC.F[0]-.05],['truck',SC.F[0]+.1],['tick',EV.fChips],
+    ['whoosh',SC.G[0]-.05],['pop',EV.g1],['pop',EV.g2],['pop',EV.g3],['chime',EV.gBanner],
+    ['sparkle',SC.H1[0]],['thump',EV.hGo],
+    ['whoosh',SC.H2[0]-.05],['tap',EV.ctaTap],['chime',EV.ctaTap+.05],
+  ].map(([k,t])=>({type:k,t:Math.max(0,+t.toFixed(3))}));
+  buildCities();buildBokeh();
+}
+
+/* ------------------------------------------------------------------ captions */
+const CAPS={
+  curious:'Socho... usi Status se <span class="hl">kapde bikne</span> lagein toh? 🤔',
+  products:'Embroidery sets, suit sets, <span class="hl">trending kurtiyan</span>',
+  single:'<span class="hl">Ek piece</span> bhi milega — <span class="hl">wholesale rate</span> pe',
+  delivery:'Delivery <span class="hl">poore India</span> mein — hum karenge 🚚',
+};
+let lastCap=null;
+function caption(t){
+  let id=null;
+  for(const k in CAPS){const p=P[k];if(t>=p.s-.08&&t<p.e+.12){id=k;break;}}
+  const box=$('cap'),tx=$('capText');
+  if(!id){box.style.opacity=0;return}
+  if(id!==lastCap){tx.innerHTML=CAPS[id];lastCap=id;}
+  const p=prog(t,P[id].s-.08,.22);
+  box.style.opacity=clamp(p*1.5);
+  box.style.transform=`translateY(${(1-eo(p))*30}px) scale(${lerp(.92,1,eback(p))})`;
+}
+
+/* ------------------------------------------------------------------ scenes */
+function sceneA(t){
+  const s1=EV.swipe1,s2=EV.swipe2,sw=.30;
+  // slides swipe left like tapping to next status
+  const x1=-W*eio(prog(t,s1,sw)), x2a=W*(1-eio(prog(t,s1,sw)));
+  const x2=t<s2?x2a:-W*eio(prog(t,s2,sw)), x3=W*(1-eio(prog(t,s2,sw)));
+  $('a1').style.transform=`translateX(${x1}px)`;
+  $('a2').style.transform=`translateX(${x2}px)`;
+  $('a3').style.transform=`translateX(${x3}px)`;
+  $('a1').querySelector('.gm-sun').style.transform=`scale(${1+.08*Math.sin(t*2)})`;
+  $('mandala').style.transform=`rotate(${t*10}deg)`;
+  kb($('a3img'),{x:.1,y:0,w:.8,h:1},{x:.15,y:0,w:.7,h:.9},prog(t,s2,P.nostock.s-s2));
+  // progress bars
+  $('bar1').style.width=(100*clamp(t/s1))+'%';
+  $('bar2').style.width=(100*prog(t,s1,s2-s1))+'%';
+  $('bar3').style.width=(100*prog(t,s2,6))+'%';
+  // seen-by counter
+  const n=t<s1?lerp(48,96,eo(t/s1)):t<s2?lerp(96,131,eo(prog(t,s1,s2-s1))):lerp(131,187,eo(prog(t,s2,2.4)));
+  $('seenN').textContent=Math.round(n);
+  // hook headline: on screen from frame 0, gentle pulse, exits at curious
+  const hk=$('hook');
+  ['hk1','hk2','hk3'].forEach((id,i)=>{
+    const el=$(id);
+    el.style.transform=`translateX(${-eio(prog(t,s2-.1+i*.05,.25))*1100}px) rotate(${-1.5+i*.8}deg)`;
+  });
+  hk.style.transform=`scale(${1+.025*Math.sin(t*5)})`;
+  // notifications drop in
+  [['n1',EV.n1],['n2',EV.n2]].forEach(([id,a])=>pop($(id),t,a,{dy:-120,s0:.85,dur:.42}));
+}
+
+function sceneB(t,l,d){
+  kb($('bimg'),{x:.1,y:.05,w:.8,h:.8},{x:.2,y:.15,w:.6,h:.6},clamp(l/d));
+  pop($('bhead'),t,SC.B[0]+.02,{dy:30,s0:.9});
+  pop($('br1'),t,SC.B[0]+.06,{dx:-160,s0:.9});
+  $('bs1').style.width=(eo(prog(t,EV.bStrike1,.22))*104)+'%';
+  $('bx1').style.transform=`scale(${eback(prog(t,EV.bStrike1+.12,.3))})`;
+  pop($('br2'),t,EV.bRow2,{dx:-160,s0:.9});
+  $('bs2').style.width=(eo(prog(t,EV.bStrike2,.22))*104)+'%';
+  $('bx2').style.transform=`scale(${eback(prog(t,EV.bStrike2+.12,.3))})`;
+  const p=pop($('bhome'),t,EV.bHome,{s0:.3,dur:.45});
+  if(t>EV.bHome+.45){const w=Math.sin((t-EV.bHome)*9)*.012;$('bhome').style.transform=`scale(${1+w})`;}
+}
+
+function sceneK(t,l){
+  const p=prog(l,0,.28);
+  $('k1').style.transform=`scale(${lerp(1.8,1,eo(p))})`;$('k1').style.opacity=clamp(p*3);
+  $('k2').style.transform=`translateY(${Math.sin(l*14)*14}px)`;
+}
+
+function setBadge(t){
+  const steps=[[P.join.s,1,'GROUP JOIN KARO'],[P.designs.s,2,'NAYE DESIGNS MILENGE'],[P.share.s,3,'STATUS · INSTA · FB PE DAALO']];
+  let cur=steps[0];for(const s of steps) if(t>=s[0]-.05) cur=s;
+  const b=$('cbadge');
+  if(b.dataset.n!=String(cur[1])){b.dataset.n=cur[1];$('cbnum').textContent=cur[1];$('cbtxt').innerHTML=`<small>STEP ${cur[1]}</small>${cur[2]}`;}
+  const p=prog(t,cur[0]-.05,.38);
+  b.style.opacity=1;
+  b.style.transform=`translateX(-50%) scale(${lerp(.6,1,eback(p))})`;
+}
+
+function sceneC(t,l){
+  // whole chat slides up from bottom on entry
+  const ent=eo(prog(l,0,.32));
+  $('sC').querySelector('.chat').style.transform=`translateY(${(1-ent)*400}px)`;
+  setBadge(t);
+  pop($('cm1'),t,EV.cSys,{s0:.8,dy:30});
+  pop($('cm2'),t,EV.cWelcome,{s0:.8,dy:40});
+  pop($('cm3'),t,EV.cAlbum,{s0:.9,dy:40,dur:.3});
+  ['al1','al2','al3','al4'].forEach((id,i)=>pop($(id),t,EV.cAlbum+i*.22,{s0:.4,dur:.32}));
+  pop($('cm4'),t,EV.cVideo,{s0:.85,dy:60});
+  // scroll chat so the newest message stays in view
+  const c4=$('cm4');const sc=-eio(prog(t,EV.cVideo-.12,.4))*Math.max(0,c4.offsetTop+c4.offsetHeight-1740);
+  $('cmsgs').style.transform=`translateY(${sc}px)`;
+  // share sheet
+  const sh=prog(t,EV.cShare,.3);
+  $('cshade').style.opacity=t<EV.cShare?0:eo(sh);
+  pop($('cshare'),t,EV.cShare+.05,{s0:.75,dy:120,dur:.4});
+  const taps=[EV.tap1,EV.tap2,EV.tap3], X=[255,540,825], Y=880;
+  const hand=$('chand');
+  if(t>=EV.cShare+.15){
+    // hand travels between icons and taps
+    let i=taps.findIndex(x=>t<x);if(i<0)i=3;
+    const from=i===0?{x:540,y:1500}:{x:X[i-1],y:Y};const to=i<3?{x:X[i],y:Y}:{x:1150,y:1700};
+    const start=i===0?EV.cShare+.15:taps[i-1]+.12, end=i<3?taps[i]:taps[2]+.6;
+    const m=eio(prog(t,start,Math.max(.05,end-start)));
+    const hx=lerp(from.x,to.x,m),hy=lerp(from.y,to.y,m);
+    const press=taps.some(x=>t>=x-.04&&t<x+.1)?.85:1;
+    css(hand,{opacity:1,left:(hx-45)+'px',top:(hy-10)+'px',transform:`scale(${press})`});
+  } else hand.style.opacity=0;
+  taps.forEach((x,i)=>{
+    const rp=$('rp'+(i+1)),tk=$('tk'+(i+1)),q=prog(t,x,.45);
+    rp.style.opacity=t<x?0:(1-q);rp.style.transform=`scale(${lerp(.6,1.6,eo(q))})`;
+    tk.style.transform=`scale(${t<x?0:eback(prog(t,x+.05,.3))})`;
+  });
+  pop($('ctoast'),t,EV.cShared,{s0:.7,base:'translateX(-50%)'});
+}
+
+function sceneC3(t,l){
+  const ent=eo(prog(l,0,.3));
+  $('sC3').querySelector('.chat').style.transform=`translateX(${(1-ent)*W}px)`;
+  const b=$('obadge');b.style.opacity=1;b.style.transform=`translateX(-50%) scale(${lerp(.6,1,eback(prog(l,.05,.38)))})`;
+  pop($('om1'),t,EV.o1+.05,{s0:.8,dy:40});
+  pop($('om2'),t,EV.o2,{s0:.8,dy:40});
+  pop($('om3'),t,EV.o3,{s0:.8,dy:40});
+  pop($('ostamp'),t,EV.oStamp,{s0:2.2,dur:.32,base:'translateX(-50%) rotate(-6deg)'});
+}
+
+const DSHOTS=[
+  ['d1','d1img',{x:.16,y:.04,w:.68,h:.62},{x:.24,y:.09,w:.52,h:.50},'Embroidery ✨'],
+  ['d2','d2img',{x:.22,y:.08,w:.56,h:.52},{x:.28,y:.12,w:.44,h:.42},'Embroidery details 🌸'],
+  ['d3','d3img',FULL,{x:.08,y:.06,w:.84,h:.84},'Suit sets 💙'],
+  ['d4','d4img',{x:.05,y:.04,w:.9,h:.9},FULL,'Co-ord sets ✨'],
+  ['d5','d5img',{x:.12,y:.08,w:.76,h:.8},{x:.06,y:.02,w:.88,h:.92},'Trending 🔥'],
+];
+function sceneD(t,l){
+  const starts=[SC.D[0],EV.d2,EV.d3,EV.d4,EV.d5,SC.D[1]];
+  let cur=0;for(let i=0;i<5;i++) if(t>=starts[i]) cur=i;
+  DSHOTS.forEach(([id,img,r0,r1],i)=>{
+    const el=$(id);
+    if(i===cur||(i===cur-1&&t<starts[cur]+.12)){
+      el.style.opacity=i===cur?clamp((t-starts[i])/.1+(i===0?1:0)):1;
+      el.style.zIndex=i===cur?2:1;
+      kb($(img),r0,r1,eo(prog(t,starts[i],starts[i+1]-starts[i]+.3)));
+      const z=i===cur?lerp(1.12,1,eo(prog(t,starts[i],.3))):1;
+      el.style.transform=`scale(${z})`;
+    } else el.style.opacity=0;
+  });
+  const fl=Math.max(0,...starts.slice(1,5).map(s=>t>=s?1-prog(t,s,.14):0));
+  $('dflash').style.opacity=fl*.55;
+  pop($('dstamp'),t,SC.D[0]+.05,{s0:.6,base:'translateX(-50%)'});
+  const tg=$('dtag');if(tg.dataset.c!=cur){tg.dataset.c=cur;tg.textContent=DSHOTS[cur][4];}
+  pop(tg,t,starts[cur]+.04,{dx:-80,s0:.9,dur:.3});
+}
+
+function sceneE(t,l){
+  const shrink=eio(prog(t,EV.eq1-.25,.4));
+  const pc=$('epc');
+  const ent=prog(l,0,.4);
+  pc.style.opacity=clamp(ent*3);
+  pc.style.transform=`translateY(${(1-eo(ent))*260}px) rotate(${lerp(-4,0,eo(ent))+shrink*-3}deg) scale(${lerp(1,.68,shrink)})`;
+  pop($('estk'),t,EV.eSticker,{s0:2.4,dur:.3,base:`translate(${shrink*40}px,${shrink*-10}px) rotate(-8deg) scale(${lerp(1,.8,shrink)})`});
+  pop($('etag'),t,EV.eTag,{s0:2.2,dur:.3,base:`translate(${-shrink*90}px,${-shrink*270}px) rotate(5deg) scale(${lerp(1,.8,shrink)})`});
+  pop($('eq1'),t,EV.eq1,{dx:-200,s0:.9});
+  pop($('eq2'),t,EV.eq2,{dx:-200,s0:.9});
+  pop($('eq3'),t,EV.eq3,{dx:-200,s0:.9});
+  if(t>EV.eq3+.35){const g=.5+.5*Math.sin((t-EV.eq3)*8);$('eq2').querySelector('.chip').style.boxShadow=`0 0 ${20+30*g}px rgba(37,211,102,${.5+.4*g})`;}
+}
+
+const CITIES=['📍 Delhi','📍 Mumbai','📍 Jaipur','📍 Kolkata','📍 Chennai','📍 Lucknow','📍 Pune','📍 Indore','📍 Patna','📍 Surat','📍 Bengaluru','📍 Hyderabad'];
+const CPOS=[[60,590],[760,570],[40,720],[790,700],[110,850],[730,840],[80,1300],[700,1310],[330,1400],[600,1430],[130,1520],[560,1540]];
+function buildCities(){const c=$('cities');if(c.children.length)return;CITIES.forEach((n,i)=>{const d=document.createElement('div');d.className='city';d.textContent=n;d.style.left=CPOS[i][0]+'px';d.style.top=CPOS[i][1]+'px';c.appendChild(d);});}
+function sceneF(t,l,d){
+  pop($('ftitle'),t,SC.F[0]+.02,{s0:.6,dy:-40});
+  pop($('fbox'),t,SC.F[0]+.12,{s0:.3});
+  if(t>SC.F[0]+.5) $('fbox').style.transform=`translateY(${Math.sin(l*6)*12}px) rotate(${Math.sin(l*4)*3}deg)`;
+  $('ftruck').style.left=lerp(-260,W+40,prog(l,.05,d-.05))+'px';
+  $('ftruck').style.transform=`translateY(${Math.abs(Math.sin(l*18))*-6}px)`;
+  [...$('cities').children].forEach((c,i)=>pop(c,t,EV.fChips+i*.07,{s0:.3,dur:.3}));
+}
+
+function sceneG(t,l){
+  pop($('ghead'),t,SC.G[0]+.02,{dy:-40,s0:.85});
+  pop($('gphone'),t,SC.G[0]+.15,{dy:300,s0:.9,dur:.5});
+  $('gsite').style.transform=`translateY(${-eio(prog(t,SC.G[0]+.8,SC.G[1]-SC.G[0]-.8))*360}px)`;
+  pop($('gc1'),t,EV.g1,{dx:200,s0:.8});
+  pop($('gc2'),t,EV.g2,{dx:200,s0:.8});
+  pop($('gc3'),t,EV.g3,{dx:200,s0:.8});
+  pop($('gbanner'),t,EV.gBanner,{dy:-60,s0:.8});
+  if(t>=EV.gBanner-.15) $('ghead').style.opacity=1-prog(t,EV.gBanner-.15,.15);
+}
+
+function buildBokeh(){const b=$('bokehs');if(b.children.length)return;for(let i=0;i<26;i++){const d=document.createElement('div');d.className='bokeh';const s=40+((i*53)%120);d.style.width=d.style.height=s+'px';d.dataset.x=(i*397)%1080;d.dataset.y=(i*733)%1920;d.dataset.v=10+(i*7)%30;b.appendChild(d);}}
+function sceneH1(t,l){
+  [...$('bokehs').children].forEach((d,i)=>{const y=(+d.dataset.y - l*(+d.dataset.v)*3+1920)%1920;d.style.left=d.dataset.x+'px';d.style.top=y+'px';d.style.opacity=.35+.35*Math.sin(l*2+i);});
+  pop($('htitle'),t,SC.H1[0]+.02,{s0:.6,dy:-30});
+  pop($('fc2'),t,SC.H1[0]+.1,{s0:.6,dy:200});
+  pop($('fc1'),t,SC.H1[0]+.22,{s0:.6,dy:200,base:`rotate(-10deg)`});
+  pop($('fc3'),t,SC.H1[0]+.32,{s0:.6,dy:200,base:`rotate(10deg)`});
+  pop($('hgo'),t,EV.hGo,{s0:2,dur:.3,base:'translateX(-50%)'});
+}
+
+function sceneH2(t,l){
+  [...$('strip').children].forEach((th,i)=>pop(th,t,SC.H2[0]+.04+i*.06,{dy:-120,s0:.7,base:`rotate(${(i-2)*3}deg)`}));
+  pop($('ctah'),t,SC.H2[0]+.1,{s0:.8,dy:30});
+  const bp=pop($('cbtn'),t,SC.H2[0]+.22,{s0:.5,dur:.45});
+  const btn=$('cbtn');
+  if(t>SC.H2[0]+.67){
+    const pr=t>=EV.ctaTap&&t<EV.ctaTap+.16?.94:1;
+    const pulse=(Math.sin((t-EV.ctaTap)*6.5)+1)/2;
+    btn.style.transform=`scale(${pr*(1+.035*pulse)})`;
+    btn.style.boxShadow=`0 0 0 ${pulse*26}px rgba(37,211,102,${.45-.35*pulse}),0 24px 50px rgba(0,0,0,.35)`;
+  }
+  // hand comes in and taps the button
+  const hd=$('hhand');
+  const hp=eio(prog(t,EV.ctaTap-.5,.45));
+  if(t<EV.ctaTap-.5) hd.style.opacity=0; else {
+    const out=eio(prog(t,EV.ctaTap+.45,.35));
+    css(hd,{opacity:1,left:(lerp(980,780,hp)+out*400)+'px',top:(lerp(1500,1050,hp)+out*500)+'px',transform:`scale(${t>=EV.ctaTap-.03&&t<EV.ctaTap+.14?.85:1})`});
+  }
+  [...$('checks').children].forEach((c,i)=>pop(c,t,SC.H2[0]+.55+i*.1,{dy:40,s0:.8}));
+  pop($('down'),t,EV.ctaTap+.5,{dy:-40,s0:.8});
+  if(t>EV.ctaTap+.9) $('down').style.transform=`translateY(${Math.abs(Math.sin((t-EV.ctaTap)*5))*22}px)`;
+}
+
+const SCENES={A:sceneA,B:sceneB,K:sceneK,C:sceneC,C3:sceneC3,D:sceneD,E:sceneE,F:sceneF,G:sceneG,H1:sceneH1,H2:sceneH2};
+function render(t){
+  for(const k in SCENES){
+    const [a,b]=SC[k];const el=$('s'+k);
+    // keep previous scene for a 0.18s overlap so cuts feel like transitions
+    const on=t>=a&&t<b+.18;
+    el.style.visibility=on?'visible':'hidden';
+    if(on){
+      el.style.zIndex=t<b?2:1;
+      SCENES[k](t,t-a,b-a);
+    }
+  }
+  // scene entry transitions (zoom-in punch) for full-screen cuts
+  for(const k of ['B','D','E','F','G','H1','H2']){
+    const [a]=SC[k];const el=$('s'+k);
+    if(t>=a&&t<a+.25){const p=eo(prog(t,a,.25));el.style.transform=`scale(${lerp(1.08,1,p)})`;el.style.opacity=clamp(p*1.6);}
+    else if(t>=a){el.style.transform='';el.style.opacity=1;}
+  }
+  caption(t);
+}
+window.setTimeline=setTimeline;window.render=render;
+window.getCues=()=>CUES;
+// readiness: all images decoded + fonts loaded
+window.READY=false;
+Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{window.READY=true;});
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+output/stills/
+output/*.wav
+output/video_silent.mp4
+output/video_final_silent.mp4
+output/render.log
+output/sfx_cues.json
+timeline_final.json
+__pycache__/
